@@ -105,18 +105,19 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.35);
             font-weight: 500;
             font-size: 1rem;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #cccccc;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .nav-links a.active {
             color: #ffffff;
+            opacity: 1;
             border-bottom: 1px solid #00ff00;
             padding-bottom: 6px;
         }
@@ -257,6 +258,17 @@
             transition: opacity 1s ease;
             border-radius: 12px;
         }
+
+        .hero-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
         
         .hero-logo-container {
             position: relative;
@@ -291,7 +303,8 @@
             text-align: center;
             opacity: 0;
             z-index: 1;
-            transition: opacity 1s ease 1.2s;
+            transition: opacity 1s ease 1.2s, opacity 1s ease 5.5s;
+            animation: stay-visible 3.5s ease 1.2s forwards, fade-to-low-opacity 1s ease 5.5s forwards;
         }
 
         .hero-logo-container:hover .mc-logo-hero {
@@ -335,37 +348,56 @@
             opacity: 0 !important;
         }
 
-        .jumbo-heading {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 500;
+        .hero-logo-container:hover .hidden-heading {
+            opacity: 1;
+        }
+
+        /* Designer Info Styling */
+        .designer-info {
             text-align: right;
-            line-height: 0.9;
-            margin: 0;
-            width: 100%;
-            max-width: 100vw;
-            white-space: nowrap;
             opacity: 0;
             transition: opacity 1s ease 1.2s;
         }
 
-        .main-years {
-            font-size: clamp(3rem, 8vw, 8rem);
+        .designer-name {
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 500;
             letter-spacing: -0.02em;
-            display: block;
+            margin: 0;
+            line-height: 1;
         }
 
-        .sub-text {
-            font-size: clamp(2.25rem, 6vw, 6rem);
-            font-weight: 400;
+        .designer-title {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
             letter-spacing: -0.02em;
-            opacity: 0.75;
-            display: block;
-            margin-top: -0.5rem;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.8;
         }
 
-        .hero-logo-container:hover .hidden-heading {
-            opacity: 1;
+        /* Animation keyframes */
+        @keyframes stay-visible {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-to-low-opacity {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.25;
+            }
         }
 
 /* Services Section */
@@ -598,12 +630,14 @@
         }
         
         .feature-card {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
         }
 
         .feature-card:hover {
@@ -619,50 +653,92 @@
         
         /* Footer styles */
         footer {
-             background-color: #020305;
+             background: rgba(2, 3, 5, 0.8);
+             backdrop-filter: blur(15px);
+             -webkit-backdrop-filter: blur(15px);
              color: #E5E5E5;
-             padding: 3rem 5%;
-             text-align: center;
-             border-top: 1px solid #2A2F34;
-         }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
+             padding: 4rem 5%;
+             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
             color: #E5E5E5;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            background-color: rgba(229, 229, 229, 0.05);
-            border: 1px solid rgba(229, 229, 229, 0.1);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
         .footer-links a {
-            color: #E5E5E5;
+            color: rgba(229, 229, 229, 0.8);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
-            color: #B0B0B0;
+            color: #E5E5E5;
         }
 
-        .copyright {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #B0B0B0;
+        .footer-description {
+            color: rgba(229, 229, 229, 0.8);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            justify-content: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(229, 229, 229, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #E5E5E5;
+            transform: translateY(-2px);
         }
         
         /* Dark theme specific styles */
@@ -741,18 +817,16 @@
                  width: 225px;
              }
 
-             .jumbo-heading {
-                 font-size: clamp(2rem, 12vw, 4rem);
-                 white-space: normal;
+             .designer-info {
                  text-align: center;
              }
 
-             .main-years {
-                 font-size: clamp(2rem, 12vw, 4rem);
+             .designer-name {
+                 font-size: clamp(2rem, 10vw, 3rem);
              }
 
-             .sub-text {
-                 font-size: clamp(1.5rem, 9vw, 3rem);
+             .designer-title {
+                 font-size: clamp(1.2rem, 6vw, 2rem);
              }
 
              .section-title {
@@ -841,6 +915,10 @@
                  padding-top: 94px; /* Increased by 24px for taller navbar */
              }
 
+             .designer-info {
+                 text-align: center;
+             }
+
              .hero {
                  height: 80vh;
              }
@@ -857,6 +935,16 @@
 
              .services-title {
                  font-size: clamp(1.8rem, 4vw, 3rem);
+             }
+
+             .footer-content {
+                 grid-template-columns: 1fr 1fr;
+                 gap: 2.5rem;
+             }
+
+             .footer-section:last-child {
+                 grid-column: 1 / -1;
+                 text-align: center;
              }
          }
 
@@ -921,14 +1009,17 @@
                 <img src="img/logo/mc-logo.svg" alt="MC Logo" class="mc-logo-hero" tabindex="0">
             </div>
             <div class="hidden-heading">
-                <h1 class="jumbo-heading">
-                    <span class="main-years">15 years</span><br />
-                    <span class="sub-text">of cyber creativity</span>
-                </h1>
+                <div class="designer-info">
+                    <h1 class="designer-name">Marceli Cieplik</h1>
+                    <h2 class="designer-title">UI/UX designer</h2>
+                </div>
             </div>
         </div>
 
         <div class="video-container">
+            <!-- Background Gradient Overlay -->
+            <div class="hero-gradient-overlay"></div>
+
             <!-- Cover Image (shown initially) -->
             <img src="vid/rider/black-rider.png" alt="Black Rider cover" class="cover-image">
 
@@ -1052,16 +1143,32 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="logo">Brand<span>Logo</span></div>
-            <p>Creating exceptional digital experiences since 2023</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Careers</a>
-                <a href="#">Contact Us</a>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <div class="footer-links">
+                    <a href="#hero">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#what">What We Do</a>
+                    <a href="#why">Why Choose Us</a>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2023 BrandLogo. All rights reserved.
+
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Twitter">t</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>About</h3>
+                <p class="footer-description">
+                    Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
+                    With expertise in creating intuitive interfaces and engaging user journeys,
+                    we transform ideas into exceptional digital solutions.
+                </p>
             </div>
         </div>
     </footer>
