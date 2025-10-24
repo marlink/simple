@@ -117,8 +117,34 @@
         .nav-links a.active {
             color: #ffffff;
             opacity: 1;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 6px;
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 1px;
+            background: #00ff00;
+            animation: spring-underline 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes spring-underline {
+            0% {
+                width: 0%;
+                opacity: 0.3;
+            }
+            50% {
+                width: 120%;
+                opacity: 0.5;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
         }
 
         /* Button styles */
@@ -185,8 +211,8 @@
          }
 
         .login-icon {
-             width: 24px;
-             height: 24px;
+             width: 40px;
+             height: 40px;
              border-radius: 50%;
              background-color: rgba(229, 229, 229, 0.1);
              border: 2px solid rgba(229, 229, 229, 0.12);
@@ -500,10 +526,20 @@
     justify-items: center;
     align-items: center;
     position: relative;
+    animation: slow-drift-left 90s linear infinite;
 }
 
 .logos-grid .logo-item:nth-child(n+5) {
     transform: translateX(50%);
+}
+
+@keyframes slow-drift-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
 }
 
 .logo-item {
@@ -801,7 +837,6 @@
              .login-icon {
                  width: 35px;
                  height: 35px;
-                 font-size: 1rem;
              }
 
              body {
@@ -859,10 +894,20 @@
              .logos-grid {
                  grid-template-columns: repeat(2, 1fr);
                  gap: 2rem;
+                 animation: slow-drift-left-mobile 90s linear infinite;
              }
 
              .logos-grid .logo-item:nth-child(n+5) {
                  transform: translateX(25%);
+             }
+
+             @keyframes slow-drift-left-mobile {
+                 0% {
+                     transform: translateX(0);
+                 }
+                 100% {
+                     transform: translateX(-50%);
+                 }
              }
 
              .partner-logo {
@@ -1198,18 +1243,76 @@
             }
         });
 
-        // Navbar scroll behavior
+        // Enhanced Navbar scroll behavior with interaction detection
         let lastScrollTop = 0;
+        let scrollTimeout;
+        let interactionTimeout;
         const navbar = document.getElementById('navbar');
+
+        // Check if cursor is over navbar
+        function isCursorOverNavbar() {
+            const rect = navbar.getBoundingClientRect();
+            return (event.clientY >= rect.top && event.clientY <= rect.bottom &&
+                    event.clientX >= rect.left && event.clientX <= rect.right);
+        }
+
+        // Handle tab visibility change
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && isCursorOverNavbar()) {
+                // User returned to tab with cursor over navbar - keep it visible
+                navbar.classList.remove('hidden');
+                clearTimeout(scrollTimeout);
+                clearTimeout(interactionTimeout);
+            }
+        });
+
+        // Track navbar interactions
+        navbar.addEventListener('mouseenter', function() {
+            clearTimeout(scrollTimeout);
+            clearTimeout(interactionTimeout);
+            navbar.classList.remove('hidden');
+        });
+
+        navbar.addEventListener('mouseleave', function() {
+            // Delay hiding after user stops interacting
+            interactionTimeout = setTimeout(function() {
+                if (!isCursorOverNavbar()) {
+                    scrollTimeout = setTimeout(function() {
+                        navbar.classList.add('hidden');
+                    }, 2000); // 2 second delay before hiding
+                }
+            }, 1000); // 1 second after mouse leaves navbar
+        });
+
+        // Track all mouse movements to detect cursor position
+        document.addEventListener('mousemove', function(event) {
+            const rect = navbar.getBoundingClientRect();
+            const isOverNavbar = (event.clientY >= rect.top && event.clientY <= rect.bottom &&
+                                  event.clientX >= rect.left && event.clientX <= rect.right);
+
+            if (isOverNavbar) {
+                clearTimeout(scrollTimeout);
+                clearTimeout(interactionTimeout);
+                navbar.classList.remove('hidden');
+            }
+        });
 
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
+            // Clear any pending hide timers when scrolling
+            clearTimeout(scrollTimeout);
+            clearTimeout(interactionTimeout);
+
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                navbar.classList.add('hidden');
+                // Scrolling down - only hide if not interacting with navbar
+                if (!isCursorOverNavbar()) {
+                    scrollTimeout = setTimeout(function() {
+                        navbar.classList.add('hidden');
+                    }, 1500); // Longer delay before hiding while scrolling
+                }
             } else {
-                // Scrolling up
+                // Scrolling up - always show
                 navbar.classList.remove('hidden');
             }
 
