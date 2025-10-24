@@ -68,10 +68,17 @@
          }
 
          .navbar-logo {
-             height: 40px;
+             height: 56px;
              width: auto;
              filter: brightness(0) invert(1);
-             opacity: 0.9;
+             opacity: 0.65;
+             transition: opacity 0.3s ease, transform 0.3s ease;
+         }
+
+         .navbar-logo:hover,
+         .navbar-logo:focus {
+             opacity: 1;
+             transform: scale(1.05);
          }
 
          .navbar-left {
@@ -111,7 +118,7 @@
         .nav-links a.active {
             color: #ffffff;
             border-bottom: 1px solid #00ff00;
-            padding-bottom: 2px;
+            padding-bottom: 6px;
         }
 
         /* Button styles */
@@ -268,7 +275,7 @@
         }
 
         .mc-logo-hero {
-            width: 200px;
+            width: 300px;
             height: auto;
             filter: brightness(0);
             cursor: pointer;
@@ -284,7 +291,7 @@
             text-align: center;
             opacity: 0;
             z-index: 1;
-            transition: opacity 1s ease 1.5s;
+            transition: opacity 1s ease 1.2s;
         }
 
         .hero-logo-container:hover .mc-logo-hero {
@@ -338,7 +345,7 @@
             max-width: 100vw;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 1s ease 0.8s;
+            transition: opacity 1s ease 1.2s;
         }
 
         .main-years {
@@ -461,6 +468,11 @@
     gap: 3rem;
     justify-items: center;
     align-items: center;
+    position: relative;
+}
+
+.logos-grid .logo-item:nth-child(n+5) {
+    transform: translateX(50%);
 }
 
 .logo-item {
@@ -691,7 +703,7 @@
              }
 
              .navbar-logo {
-                 height: 35px;
+                 height: 51px;
              }
 
              .btn-free-website {
@@ -726,7 +738,7 @@
              }
 
              .mc-logo-hero {
-                 width: 150px;
+                 width: 225px;
              }
 
              .jumbo-heading {
@@ -776,6 +788,10 @@
                  gap: 2rem;
              }
 
+             .logos-grid .logo-item:nth-child(n+5) {
+                 transform: translateX(25%);
+             }
+
              .partner-logo {
                  height: 50px;
              }
@@ -812,7 +828,7 @@
              }
 
              .navbar-logo {
-                 height: 40px;
+                 height: 56px;
              }
 
              .btn-free-website {
@@ -830,7 +846,7 @@
              }
 
              .mc-logo-hero {
-                 width: 200px;
+                 width: 300px;
              }
 
              .services-cards {
