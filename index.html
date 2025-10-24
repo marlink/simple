@@ -259,7 +259,7 @@
 
         .hero-logo {
             position: relative;
-            transition: filter 0.8s ease, opacity 1.2s ease 0.5s;
+            transition: filter 0.8s ease;
         }
 
         .mc-logo-hero {
@@ -267,7 +267,7 @@
             height: auto;
             filter: brightness(0);
             cursor: pointer;
-            transition: filter 0.8s ease, opacity 1.2s ease 0.5s;
+            transition: filter 0.8s ease, opacity 1.2s ease 0.8s, transform 1.2s ease 0.8s;
         }
 
         .hidden-heading {
@@ -279,10 +279,11 @@
             text-align: center;
             opacity: 0;
             z-index: 1;
-            transition: opacity 1s ease 0.8s;
+            transition: opacity 1s ease 1.5s;
         }
 
         .hero-logo-container:hover .mc-logo-hero {
+            filter: brightness(0) invert(1);
             opacity: 0;
             transform: scale(0.8);
         }
@@ -291,7 +292,7 @@
             opacity: 1;
         }
 
-        /* Ensure independent hover behaviors */
+        /* Ensure independent hover behaviors - navbar only controls video */
         .navbar-logo:hover ~ .hero .video-container .cover-image {
             opacity: 0 !important;
         }
@@ -300,8 +301,26 @@
             opacity: 1 !important;
         }
 
+        /* Prevent navbar hover from affecting hero logo animations */
+        .navbar-logo:hover ~ .hero .mc-logo-hero {
+            filter: brightness(0) !important;
+        }
+
+        .navbar-logo:hover ~ .hero .hidden-heading {
+            opacity: 0 !important;
+        }
+
         .mc-logo-hero:hover {
             filter: brightness(0) invert(1);
+        }
+
+        /* Mobile navbar hover should not affect hero animations */
+        .navbar-logo:hover ~ .hero .mc-logo-hero {
+            filter: brightness(0) !important;
+        }
+
+        .navbar-logo:hover ~ .hero .hidden-heading {
+            opacity: 0 !important;
         }
 
         .jumbo-heading {
@@ -337,15 +356,93 @@
             opacity: 0;
             transition: opacity 1s ease 0.8s;
         }
+.hero-logo-container:hover .hidden-heading {
+    opacity: 1;
+}
 
-        .hero-logo-container:hover .hidden-heading {
-            opacity: 1;
-        }
-        
+/* Services Section */
+.services-section {
+    padding: 8rem 5% 6rem;
+    background-color: #020305;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.services-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
 
+.services-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 4rem;
+}
 
-        /* What section styles - Zigzag layout */
+.services-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.service-card {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.card-content h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+/* What section styles - Zigzag layout */
         .what-section {
              background-color: #020305;
              padding: 5rem 5%;
@@ -594,6 +691,25 @@
                  font-size: 2rem;
                  letter-spacing: -0.02em;
              }
+
+             .services-section {
+                 padding: 4rem 5% 3rem;
+             }
+
+             .services-cards {
+                 grid-template-columns: 1fr;
+                 gap: 1.5rem;
+                 max-width: 300px;
+             }
+
+             .services-title {
+                 font-size: clamp(1.5rem, 8vw, 2.5rem);
+                 margin-bottom: 2rem;
+             }
+
+             .card-content h3 {
+                 font-size: clamp(1.2rem, 6vw, 1.8rem);
+             }
          }
 
          /* 768px and up - tablet and desktop */
@@ -642,6 +758,16 @@
              .mc-logo-hero {
                  width: 200px;
              }
+
+             .services-cards {
+                 grid-template-columns: repeat(3, 1fr);
+                 gap: 1.5rem;
+                 max-width: 800px;
+             }
+
+             .services-title {
+                 font-size: clamp(1.8rem, 4vw, 3rem);
+             }
          }
 
          /* 992px and up */
@@ -684,6 +810,7 @@
         <div class="navbar-center">
             <div class="nav-links">
                 <a href="#hero" class="active">Home</a>
+                <a href="#services">Services</a>
                 <a href="#what">What</a>
                 <a href="#why">Why</a>
                 <a href="#when">When</a>
@@ -724,6 +851,29 @@
         </div>
     </section>
 
+    <!-- Services Cards Section -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <h2 class="services-title">WEB, MOBILE, META / AI</h2>
+            <div class="services-cards">
+                <div class="service-card">
+                    <div class="card-content">
+                        <h3>WEB</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="card-content">
+                        <h3>MOBILE</h3>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="card-content">
+                        <h3>META / AI</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- What Section -->
     <section class="what-section" id="what">
