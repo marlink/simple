@@ -1346,10 +1346,25 @@
                 const loadedMedia = new Set();
                 const failedMedia = new Set();
 
+                // Preload critical videos before lazy loading initialization
+                function preloadCriticalVideos() {
+                    const criticalVideos = document.querySelectorAll('video.video-bg, video.zigzag-video');
+
+                    criticalVideos.forEach(video => {
+                        if (video.getAttribute('data-src') && !video.src) {
+                            video.src = video.getAttribute('data-src');
+                            video.load();
+                            loadedMedia.add(video); // Mark as loaded to prevent lazy loading
+                            video.classList.remove('lazy-loading');
+                            video.classList.add('lazy-loaded');
+                        }
+                    });
+                }
+
                 // Check for Intersection Observer support
                 if ('IntersectionObserver' in window) {
                     // Create observer with improved configuration
-                    const lazyMediaObserver = new IntersectionObserver((entries, observer) => {
+                    let lazyMediaObserver = new IntersectionObserver((entries, observer) => {
                         entries.forEach((entry) => {
                             if (entry.isIntersecting && !loadedMedia.has(entry.target)) {
                                 const media = entry.target;
@@ -1472,8 +1487,8 @@
                         }
                     }
 
-                    // Observe all lazy media elements
-                    const lazyVideos = document.querySelectorAll('video[data-src]');
+                    // Observe all lazy media elements (excluding critical videos already loaded)
+                    const lazyVideos = document.querySelectorAll('video[data-src]:not(.video-bg):not(.zigzag-video)');
                     const lazyImages = document.querySelectorAll('img[data-src]');
 
                     // Add mobile performance optimizations
@@ -1483,8 +1498,9 @@
                         threshold: isMobile ? 0.01 : 0.1 // Lower threshold on mobile
                     };
 
-                    lazyMediaObserver.disconnect(); // Reset observer
-                    lazyMediaObserver.observe = new IntersectionObserver(
+                    // Disconnect existing observer and create new one with updated options
+                    lazyMediaObserver.disconnect();
+                    lazyMediaObserver = new IntersectionObserver(
                         lazyMediaObserver.callback,
                         observerOptions
                     );
@@ -1552,7 +1568,10 @@
                 }
             }
 
-            // Initialize lazy loading
+            // Preload critical videos before initializing lazy loading
+            preloadCriticalVideos();
+
+            // Initialize lazy loading after critical videos are preloaded
             lazyLoadMedia();
 
             // Navbar logo hover behavior (enhanced logging)
