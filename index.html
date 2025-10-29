@@ -107,11 +107,12 @@
             color: rgba(255, 255, 255, 0.35);
             font-weight: 500;
             font-size: 1rem;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .nav-links a:hover {
             color: rgba(255, 255, 255, 0.7);
+            transform: scale(1.05);
         }
 
         .nav-links a.active {
@@ -322,14 +323,13 @@
         .hidden-heading {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            text-align: center;
+            right: 5%;
+            transform: translateY(-50%);
+            width: auto;
+            text-align: right;
             opacity: 0;
+            visibility: hidden;
             z-index: 1;
-            transition: opacity 1s ease 1.2s, opacity 1s ease 5.5s;
-            animation: stay-visible 3.5s ease 1.2s forwards, fade-to-low-opacity 1s ease 5.5s forwards;
         }
 
         .hero-logo-container:hover .mc-logo-hero {
@@ -373,15 +373,13 @@
             opacity: 0 !important;
         }
 
-        .hero-logo-container:hover .hidden-heading {
-            opacity: 1;
-        }
 
         /* Designer Info Styling */
         .designer-info {
             text-align: right;
             opacity: 0;
-            transition: opacity 1s ease 1.2s;
+            visibility: hidden;
+            transition: opacity 0.8s ease;
         }
 
         .designer-name {
@@ -563,6 +561,13 @@
     object-fit: contain;
     filter: brightness(0) invert(1) opacity(0.8);
     animation: gentle-pulse 4s ease-in-out infinite;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.partner-logo:hover,
+.partner-logo:focus {
+    filter: none;
+    opacity: 1;
 }
 
 @keyframes gentle-pulse {
@@ -612,17 +617,34 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
+            aspect-ratio: 16 / 9;
         }
 
         .zigzag-image img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .zigzag-image:hover img {
             transform: scale(1.05);
+            opacity: 0;
+        }
+
+        .zigzag-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .zigzag-image:hover .zigzag-video {
+            opacity: 1;
         }
 
         .zigzag-text {
@@ -1105,28 +1127,28 @@
         <div class="logos-container">
             <div class="logos-grid">
                 <div class="logo-item">
-                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo">
+                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo">
+                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo">
+                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo">
+                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo">
+                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo">
+                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo">
+                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo">
+                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0">
                 </div>
             </div>
         </div>
@@ -1137,7 +1159,11 @@
         <div class="zigzag-container">
             <div class="zigzag-item">
                 <div class="zigzag-image">
-                    <img src="vid/rider/black-rider.png" alt="What we do">
+                    <img src="vid/formula/bolid.jpeg" alt="What we create">
+                    <video class="zigzag-video" autoplay muted loop playsinline>
+                        <source src="vid/formula/bolid.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="zigzag-text">
                     <h3>What We Create</h3>
@@ -1235,11 +1261,40 @@
                     coverImage.style.opacity = '0';
                     videoBg.style.opacity = '1';
                 });
-
+        
                 navbarLogo.addEventListener('mouseleave', function() {
                     coverImage.style.opacity = '1';
                     videoBg.style.opacity = '0';
                 });
+            }
+        
+            // Logo hover for designer info
+            const heroLogoContainer = document.querySelector('.hero-logo-container');
+            const designerInfo = document.querySelector('.designer-info');
+            const heroSection = document.querySelector('.hero');
+            if (heroLogoContainer && designerInfo) {
+                let hideTimeout;
+                heroLogoContainer.addEventListener('mouseenter', () => {
+                    setTimeout(() => {
+                        designerInfo.style.opacity = '1';
+                        designerInfo.style.visibility = 'visible';
+                    }, 200); // Appear after 200ms
+                });
+                heroLogoContainer.addEventListener('mouseleave', () => {
+                    hideTimeout = setTimeout(() => {
+                        designerInfo.style.opacity = '0';
+                        designerInfo.style.visibility = 'hidden';
+                    }, 1000); // 1 second delay before hiding
+                });
+                if (heroSection) {
+                    heroSection.addEventListener('mouseenter', () => {
+                        clearTimeout(hideTimeout);
+                    });
+                    heroSection.addEventListener('mouseleave', () => {
+                        designerInfo.style.opacity = '0';
+                        designerInfo.style.visibility = 'hidden';
+                    });
+                }
             }
         });
 
