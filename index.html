@@ -271,6 +271,103 @@
             object-fit: cover;
             opacity: 0;
             transition: opacity 1s ease;
+            will-change: opacity; /* Optimize for animations */
+        }
+
+        /* Lazy loading states */
+        .lazy-loading {
+            position: relative;
+        }
+
+        .lazy-loading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: lazy-spin 1s linear infinite;
+            z-index: 3;
+        }
+
+        @keyframes lazy-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .lazy-loaded {
+            /* Remove loading indicator */
+        }
+
+        .lazy-loaded::before {
+            display: none;
+        }
+
+        .lazy-error {
+            position: relative;
+        }
+
+        .lazy-error::before {
+            content: '⚠';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .lazy-error img,
+        .lazy-error video {
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+
+        .lazy-retry {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .lazy-retry:hover {
+            opacity: 0.8 !important;
+        }
+
+        /* Progress indicator for better UX */
+        .lazy-progress {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .lazy-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            animation: lazy-progress-fill 3s ease-out forwards;
+        }
+
+        @keyframes lazy-progress-fill {
+            0% { left: -100%; }
+            100% { left: 0%; }
         }
         
         .cover-image {
@@ -830,9 +927,9 @@
              }
 
              .nav-links {
-                 gap: 1rem;
-                 flex-wrap: wrap;
-                 justify-content: center;
+                 flex-direction: column;
+                 gap: 0.5rem;
+                 align-items: center;
              }
 
              .navbar-logo {
@@ -1049,7 +1146,7 @@
     <!-- Top Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-left">
-            <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo">
+            <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo" loading="lazy">
         </div>
         <div class="navbar-center">
             <div class="nav-links">
@@ -1063,7 +1160,7 @@
         <div class="navbar-right">
             <button class="btn-free-website">Free website</button>
             <div class="login-icon">
-                <img src="img/icons/user.svg" alt="User Login" class="user-icon">
+                <img src="img/icons/user.svg" alt="User Login" class="user-icon" loading="lazy">
             </div>
         </div>
     </nav>
@@ -1072,7 +1169,7 @@
     <section class="hero" id="hero">
         <div class="hero-logo-container">
             <div class="hero-logo">
-                <img src="img/logo/mc-logo.svg" alt="MC Logo" class="mc-logo-hero" tabindex="0">
+                <img src="img/logo/mc-logo.svg" alt="MC Logo" class="mc-logo-hero" tabindex="0" loading="lazy">
             </div>
             <div class="hidden-heading">
                 <div class="designer-info">
@@ -1087,12 +1184,10 @@
             <div class="hero-gradient-overlay"></div>
 
             <!-- Cover Image (shown initially) -->
-            <img src="vid/rider/black-rider.png" alt="Black Rider cover" class="cover-image">
+            <img src="vid/rider/black-rider.png" alt="Black Rider cover" class="cover-image" loading="lazy">
 
-            <!-- Video Background (revealed on hover) -->
-            <video class="video-bg" autoplay muted loop playsinline>
-                <!-- Video source - black-rider video -->
-                <source src="vid/rider/black-rider.mp4" type="video/mp4">
+            <!-- Video Background (revealed on hover) - lazy loaded -->
+            <video class="video-bg lazy-loading" data-src="vid/rider/black-rider.mp4" muted loop playsinline>
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -1127,28 +1222,28 @@
         <div class="logos-container">
             <div class="logos-grid">
                 <div class="logo-item">
-                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0">
+                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0">
+                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0">
+                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0">
+                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0">
+                    <img src="img/logo/brand-superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0">
+                    <img src="img/logo/TUI_Travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0">
+                    <img src="img/logo/barclays-ar21.svg" alt="Barclays" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
                 <div class="logo-item">
-                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0">
+                    <img src="img/logo/banco_santander.svg" alt="Banco Santander" class="partner-logo" tabindex="0" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1159,9 +1254,8 @@
         <div class="zigzag-container">
             <div class="zigzag-item">
                 <div class="zigzag-image">
-                    <img src="vid/formula/bolid.jpeg" alt="What we create">
-                    <video class="zigzag-video" autoplay muted loop playsinline>
-                        <source src="vid/formula/bolid.mp4" type="video/mp4">
+                    <img src="vid/formula/bolid.jpeg" alt="What we create" loading="lazy">
+                    <video class="zigzag-video lazy-loading" data-src="vid/formula/bolid.mp4" muted loop playsinline>
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -1176,12 +1270,12 @@
                     <p>Our solutions are crafted with precision, ensuring scalability, performance, and exceptional user experiences.</p>
                 </div>
                 <div class="zigzag-image">
-                    <img src="vid/rider/black-rider.png" alt="What we deliver">
+                    <img src="vid/rider/black-rider.png" alt="What we deliver" loading="lazy">
                 </div>
             </div>
             <div class="zigzag-item">
                 <div class="zigzag-image">
-                    <img src="vid/rider/black-rider.png" alt="What we achieve">
+                    <img src="vid/rider/black-rider.png" alt="What we achieve" loading="lazy">
                 </div>
                 <div class="zigzag-text">
                     <h3>What We Achieve</h3>
@@ -1244,57 +1338,370 @@
     </footer>
 
     <script>
-        // Simple script to ensure video plays properly
+        // Enhanced lazy loading implementation with Intersection Observer
         document.addEventListener('DOMContentLoaded', function() {
-            const video = document.querySelector('.video-bg');
-            if (video) {
-                video.play();
+            // Lazy loading for videos and images with enhanced error handling
+            function lazyLoadMedia() {
+                // Track loaded media for performance monitoring
+                const loadedMedia = new Set();
+                const failedMedia = new Set();
+
+                // Check for Intersection Observer support
+                if ('IntersectionObserver' in window) {
+                    // Create observer with improved configuration
+                    const lazyMediaObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting && !loadedMedia.has(entry.target)) {
+                                const media = entry.target;
+                                loadedMedia.add(media); // Prevent duplicate loading
+
+                                loadMedia(media);
+                                observer.unobserve(media); // Stop observing once loaded
+                            }
+                        });
+                    }, {
+                        rootMargin: '100px 0px', // Increased margin for better performance
+                        threshold: 0.01 // Lower threshold for earlier loading
+                    });
+
+                    // Load media function with comprehensive error handling
+                    function loadMedia(media) {
+                        const src = media.getAttribute('data-src');
+                        if (!src) return;
+
+                        // Add progress indicator for better UX
+                        if (!media.classList.contains('lazy-progress')) {
+                            media.classList.add('lazy-loading');
+                            const progressDiv = document.createElement('div');
+                            progressDiv.className = 'lazy-progress';
+                            media.parentElement.appendChild(progressDiv);
+                        }
+
+                        // Set up timeout for loading (30 seconds max)
+                        const loadTimeout = setTimeout(() => {
+                            handleMediaError(media, src, 'timeout');
+                        }, 30000);
+
+                        if (media.tagName === 'VIDEO') {
+                            // Handle video loading
+                            media.src = src;
+                            media.load();
+
+                            media.addEventListener('loadeddata', () => {
+                                clearTimeout(loadTimeout);
+                                handleMediaSuccess(media);
+                            });
+
+                            media.addEventListener('error', (e) => {
+                                clearTimeout(loadTimeout);
+                                handleMediaError(media, src, 'video_error', e);
+                            });
+
+                            // Handle video-specific events
+                            media.addEventListener('canplay', () => {
+                                clearTimeout(loadTimeout);
+                            });
+
+                        } else if (media.tagName === 'IMG') {
+                            // Handle image loading
+                            media.src = src;
+
+                            media.addEventListener('load', () => {
+                                clearTimeout(loadTimeout);
+                                handleMediaSuccess(media);
+                            });
+
+                            media.addEventListener('error', (e) => {
+                                clearTimeout(loadTimeout);
+                                handleMediaError(media, src, 'image_error', e);
+                            });
+                        }
+                    }
+
+                    // Success handler
+                    function handleMediaSuccess(media) {
+                        media.classList.remove('lazy-loading', 'lazy-error');
+                        media.classList.add('lazy-loaded');
+
+                        // Remove progress indicator
+                        const progress = media.parentElement.querySelector('.lazy-progress');
+                        if (progress) {
+                            progress.remove();
+                        }
+
+                        // Ensure hover animations still work
+                        media.style.opacity = '1';
+                    }
+
+                    // Enhanced error handler with retry mechanism
+                    function handleMediaError(media, src, errorType, event) {
+                        console.warn(`Media failed to load (${errorType}):`, src, event);
+
+                        // Add error state
+                        media.classList.remove('lazy-loading');
+                        media.classList.add('lazy-error', 'lazy-retry');
+
+                        // Remove progress indicator
+                        const progress = media.parentElement.querySelector('.lazy-progress');
+                        if (progress) {
+                            progress.remove();
+                        }
+
+                        // Add retry functionality
+                        let retryCount = 0;
+                        const maxRetries = 2;
+
+                        media.addEventListener('click', function retryHandler() {
+                            if (retryCount < maxRetries && failedMedia.has(media)) {
+                                retryCount++;
+                                failedMedia.delete(media);
+                                media.classList.remove('lazy-error', 'lazy-retry');
+                                loadMedia(media);
+                            } else {
+                                media.removeEventListener('click', retryHandler);
+                                // Show permanent error state
+                                media.title = 'Failed to load media. Please refresh the page.';
+                            }
+                        });
+
+                        failedMedia.add(media);
+
+                        // Fallback: show placeholder or keep existing content visible
+                        if (media.tagName === 'IMG') {
+                            media.style.opacity = '0.3';
+                        }
+                    }
+
+                    // Observe all lazy media elements
+                    const lazyVideos = document.querySelectorAll('video[data-src]');
+                    const lazyImages = document.querySelectorAll('img[data-src]');
+
+                    // Add mobile performance optimizations
+                    const isMobile = window.innerWidth <= 768;
+                    const observerOptions = {
+                        rootMargin: isMobile ? '200px 0px' : '100px 0px', // Larger margin on mobile
+                        threshold: isMobile ? 0.01 : 0.1 // Lower threshold on mobile
+                    };
+
+                    lazyMediaObserver.disconnect(); // Reset observer
+                    lazyMediaObserver.observe = new IntersectionObserver(
+                        lazyMediaObserver.callback,
+                        observerOptions
+                    );
+
+                    lazyVideos.forEach(video => {
+                        video.classList.add('lazy-loading');
+                        lazyMediaObserver.observe(video);
+                    });
+
+                    lazyImages.forEach(img => {
+                        // Only add loading class if not using native lazy loading
+                        if (!img.hasAttribute('loading') || img.getAttribute('loading') !== 'lazy') {
+                            img.classList.add('lazy-loading');
+                        }
+                        lazyMediaObserver.observe(img);
+                    });
+
+                } else {
+                    // Enhanced fallback for browsers without Intersection Observer
+                    console.warn('Intersection Observer not supported. Using enhanced fallback lazy loading.');
+
+                    // Throttled scroll handler for better performance
+                    let scrollTimeout;
+                    function throttleScroll() {
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(fallbackLazyLoad, 100);
+                    }
+
+                    // Enhanced fallback lazy loading
+                    function fallbackLazyLoad() {
+                        const lazyMedia = document.querySelectorAll('video[data-src], img[data-src]');
+                        lazyMedia.forEach(media => {
+                            if (!loadedMedia.has(media) && isElementInViewport(media, 200)) { // 200px buffer
+                                loadedMedia.add(media);
+                                const src = media.getAttribute('data-src');
+                                if (src) {
+                                    media.src = src;
+                                    media.classList.remove('lazy-loading');
+                                    media.classList.add('lazy-loaded');
+                                    media.removeAttribute('data-src');
+                                }
+                            }
+                        });
+                    }
+
+                    function isElementInViewport(el, buffer = 0) {
+                        const rect = el.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+                        return (
+                            rect.top >= -buffer &&
+                            rect.left >= -buffer &&
+                            rect.bottom <= viewportHeight + buffer &&
+                            rect.right <= viewportWidth + buffer
+                        );
+                    }
+
+                    // Initial load check
+                    fallbackLazyLoad();
+
+                    // Use throttled scroll events
+                    window.addEventListener('scroll', throttleScroll, { passive: true });
+                    window.addEventListener('resize', throttleScroll, { passive: true });
+                }
             }
 
-            // Navbar logo hover behavior
+            // Initialize lazy loading
+            lazyLoadMedia();
+
+            // Navbar logo hover behavior (enhanced logging)
             const navbarLogo = document.querySelector('.navbar-logo');
             const coverImage = document.querySelector('.cover-image');
             const videoBg = document.querySelector('.video-bg');
 
             if (navbarLogo && coverImage && videoBg) {
-                navbarLogo.addEventListener('mouseenter', function() {
-                    coverImage.style.opacity = '0';
-                    videoBg.style.opacity = '1';
+                console.log('Navbar hover setup - Elements found:', {
+                    navbarLogo: navbarLogo,
+                    coverImage: coverImage,
+                    videoBg: videoBg,
+                    videoSrc: videoBg.src,
+                    videoDataSrc: videoBg.getAttribute('data-src'),
+                    videoClassList: videoBg.classList,
+                    coverOpacity: window.getComputedStyle(coverImage).opacity,
+                    videoOpacity: window.getComputedStyle(videoBg).opacity
                 });
-        
-                navbarLogo.addEventListener('mouseleave', function() {
+
+                navbarLogo.addEventListener('mouseenter', function(e) {
+                    console.log('=== Navbar logo MOUSEENTER ===');
+                    console.log('Event target:', e.target);
+                    console.log('Event currentTarget:', e.currentTarget);
+                    console.log('Video src before hover:', videoBg.src);
+                    console.log('Video data-src:', videoBg.getAttribute('data-src'));
+                    console.log('Video classList:', videoBg.classList);
+                    console.log('Video readyState:', videoBg.readyState);
+                    console.log('Video networkState:', videoBg.networkState);
+
+                    // Force video loading if not already loaded
+                    if (!videoBg.src && videoBg.getAttribute('data-src')) {
+                        console.log('Forcing video load...');
+                        videoBg.src = videoBg.getAttribute('data-src');
+                        videoBg.load();
+                    }
+
+                    console.log('Setting cover opacity to 0...');
+                    coverImage.style.opacity = '0';
+                    console.log('Setting video opacity to 1...');
+                    videoBg.style.opacity = '1';
+
+                    // Verify computed styles after change
+                    setTimeout(() => {
+                        console.log('After hover - Computed styles:', {
+                            coverOpacity: window.getComputedStyle(coverImage).opacity,
+                            videoOpacity: window.getComputedStyle(videoBg).opacity
+                        });
+                    }, 50);
+
+                    // Ensure video plays when revealed by hover
+                    if (videoBg.src) {
+                        console.log('Video src exists, attempting to play...');
+                        videoBg.play().then(() => {
+                            console.log('Video play successful');
+                        }).catch(e => {
+                            console.error('Video play failed:', e);
+                        });
+                    } else {
+                        console.warn('Video src still not set after loading attempt:', videoBg.src);
+                    }
+                });
+
+                navbarLogo.addEventListener('mouseleave', function(e) {
+                    console.log('=== Navbar logo MOUSELEAVE ===');
+                    console.log('Event target:', e.target);
+                    console.log('Event currentTarget:', e.currentTarget);
+
+                    console.log('Setting cover opacity to 1...');
                     coverImage.style.opacity = '1';
+                    console.log('Setting video opacity to 0...');
                     videoBg.style.opacity = '0';
+
+                    // Verify computed styles after change
+                    setTimeout(() => {
+                        console.log('After leave - Computed styles:', {
+                            coverOpacity: window.getComputedStyle(coverImage).opacity,
+                            videoOpacity: window.getComputedStyle(videoBg).opacity
+                        });
+                    }, 50);
+                });
+            } else {
+                console.error('Navbar hover setup failed - Elements not found:', {
+                    navbarLogo: !!navbarLogo,
+                    coverImage: !!coverImage,
+                    videoBg: !!videoBg
                 });
             }
-        
-            // Logo hover for designer info
+
+            // Logo hover for designer info (enhanced logging)
             const heroLogoContainer = document.querySelector('.hero-logo-container');
             const designerInfo = document.querySelector('.designer-info');
             const heroSection = document.querySelector('.hero');
             if (heroLogoContainer && designerInfo) {
+                console.log('Hero logo hover setup - Elements found:', {
+                    heroLogoContainer: heroLogoContainer,
+                    designerInfo: designerInfo,
+                    heroSection: heroSection,
+                    designerInfoComputedStyle: {
+                        opacity: window.getComputedStyle(designerInfo).opacity,
+                        visibility: window.getComputedStyle(designerInfo).visibility
+                    }
+                });
                 let hideTimeout;
                 heroLogoContainer.addEventListener('mouseenter', () => {
+                    console.log('=== Hero logo container MOUSEENTER ===');
+                    console.log('Hero logo container element:', heroLogoContainer);
+                    console.log('Designer info element:', designerInfo);
+                    console.log('Designer info before hover - opacity:', window.getComputedStyle(designerInfo).opacity);
+                    console.log('Designer info before hover - visibility:', window.getComputedStyle(designerInfo).visibility);
                     setTimeout(() => {
+                        console.log('Hero logo hover delay completed, setting designer info to visible...');
                         designerInfo.style.opacity = '1';
                         designerInfo.style.visibility = 'visible';
+                        console.log('Designer info after delay - opacity:', window.getComputedStyle(designerInfo).opacity);
+                        console.log('Designer info after delay - visibility:', window.getComputedStyle(designerInfo).visibility);
                     }, 200); // Appear after 200ms
                 });
                 heroLogoContainer.addEventListener('mouseleave', () => {
+                    console.log('=== Hero logo container MOUSELEAVE ===');
+                    console.log('Setting hide timeout for 1 second...');
                     hideTimeout = setTimeout(() => {
+                        console.log('Hero logo hide timeout completed, hiding designer info...');
                         designerInfo.style.opacity = '0';
                         designerInfo.style.visibility = 'hidden';
+                        console.log('Designer info after hide - opacity:', window.getComputedStyle(designerInfo).opacity);
+                        console.log('Designer info after hide - visibility:', window.getComputedStyle(designerInfo).visibility);
                     }, 1000); // 1 second delay before hiding
                 });
                 if (heroSection) {
                     heroSection.addEventListener('mouseenter', () => {
+                        console.log('=== Hero section MOUSEENTER ===');
+                        console.log('Clearing hide timeout...');
                         clearTimeout(hideTimeout);
                     });
                     heroSection.addEventListener('mouseleave', () => {
+                        console.log('=== Hero section MOUSELEAVE ===');
+                        console.log('Hiding designer info immediately...');
                         designerInfo.style.opacity = '0';
                         designerInfo.style.visibility = 'hidden';
+                        console.log('Designer info after section leave - opacity:', window.getComputedStyle(designerInfo).opacity);
+                        console.log('Designer info after section leave - visibility:', window.getComputedStyle(designerInfo).visibility);
                     });
                 }
+            } else {
+                console.error('Hero logo hover setup failed - Elements not found:', {
+                    heroLogoContainer: !!heroLogoContainer,
+                    designerInfo: !!designerInfo,
+                    heroSection: !!heroSection
+                });
             }
         });
 
@@ -1352,26 +1759,261 @@
             }
         });
 
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            // Clear any pending hide timers when scrolling
-            clearTimeout(scrollTimeout);
-            clearTimeout(interactionTimeout);
-
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down - only hide if not interacting with navbar
-                if (!isCursorOverNavbar()) {
-                    scrollTimeout = setTimeout(function() {
-                        navbar.classList.add('hidden');
-                    }, 1500); // Longer delay before hiding while scrolling
-                }
-            } else {
-                // Scrolling up - always show
-                navbar.classList.remove('hidden');
+            // Video play/pause based on viewport visibility (for loaded videos only)
+            function handleVideoVisibility() {
+                const videos = document.querySelectorAll('video.video-bg');
+                videos.forEach(video => {
+                    if (video.src && isElementInViewport(video)) {
+                        video.play().catch(e => console.log('Video play failed:', e));
+                    } else if (video.src) {
+                        video.pause();
+                    }
+                });
             }
 
-            lastScrollTop = scrollTop;
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+
+            // Check video visibility on scroll and resize
+            window.addEventListener('scroll', function() {
+                handleVideoVisibility();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Clear any pending hide timers when scrolling
+                clearTimeout(scrollTimeout);
+                clearTimeout(interactionTimeout);
+
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down - only hide if not interacting with navbar
+                    if (!isCursorOverNavbar()) {
+                        scrollTimeout = setTimeout(function() {
+                            navbar.classList.add('hidden');
+                        }, 1500); // Longer delay before hiding while scrolling
+                    }
+                } else {
+                    // Scrolling up - always show
+                    navbar.classList.remove('hidden');
+                }
+
+                lastScrollTop = scrollTop;
+            });
+
+            window.addEventListener('resize', handleVideoVisibility);
+    </script>
+        // Bolid card hover/focus functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the first zigzag-image that has a video (bolid card)
+            const zigzagImages = document.querySelectorAll('.zigzag-image');
+            const bolidImage = zigzagImages[0]; // First one with bolid video
+
+            if (bolidImage) {
+                const bolidCover = bolidImage.querySelector('img');
+                const bolidVideo = bolidImage.querySelector('.zigzag-video');
+
+                if (bolidCover && bolidVideo) {
+                    console.log('Bolid card hover setup - Elements found:', {
+                        bolidImage: bolidImage,
+                        bolidCover: bolidCover,
+                        bolidVideo: bolidVideo,
+                        videoSrc: bolidVideo.src,
+                        videoDataSrc: bolidVideo.getAttribute('data-src'),
+                        videoClassList: bolidVideo.classList,
+                        coverOpacity: window.getComputedStyle(bolidCover).opacity,
+                        videoOpacity: window.getComputedStyle(bolidVideo).opacity
+                    });
+
+                    // Function to ensure video is loaded and play it
+                    function ensureBolidVideoLoadedAndPlay() {
+                        return new Promise((resolve) => {
+                            if (!bolidVideo.src && bolidVideo.getAttribute('data-src')) {
+                                console.log('Forcing bolid video load...');
+                                bolidVideo.src = bolidVideo.getAttribute('data-src');
+                                bolidVideo.load();
+
+                                bolidVideo.addEventListener('loadeddata', () => {
+                                    console.log('Bolid video loaded, playing...');
+                                    bolidVideo.play().then(() => {
+                                        console.log('Bolid video play successful');
+                                        resolve();
+                                    }).catch(e => {
+                                        console.error('Bolid video play failed:', e);
+                                        resolve(); // Resolve anyway to continue with UI changes
+                                    });
+                                }, { once: true });
+                            } else if (bolidVideo.src) {
+                                console.log('Bolid video already loaded, attempting to play...');
+                                bolidVideo.play().then(() => {
+                                    console.log('Bolid video play successful');
+                                    resolve();
+                                }).catch(e => {
+                                    console.error('Bolid video play failed:', e);
+                                    resolve();
+                                });
+                            } else {
+                                console.warn('Bolid video has no src or data-src');
+                                resolve();
+                            }
+                        });
+                    }
+
+                    // Function to handle hover/focus activation
+                    function activateBolidVideo() {
+                        console.log('=== Activating bolid video ===');
+                        console.log('Bolid video src before activation:', bolidVideo.src);
+                        console.log('Bolid video data-src:', bolidVideo.getAttribute('data-src'));
+                        console.log('Bolid video classList:', bolidVideo.classList);
+                        console.log('Bolid video readyState:', bolidVideo.readyState);
+                        console.log('Bolid video networkState:', bolidVideo.networkState);
+
+                        // Ensure video is loaded and play it
+                        ensureBolidVideoLoadedAndPlay().then(() => {
+                            console.log('Setting bolid cover opacity to 0...');
+                            bolidCover.style.opacity = '0';
+                            console.log('Setting bolid video opacity to 1...');
+                            bolidVideo.style.opacity = '1';
+
+                            // Verify computed styles after change
+                            setTimeout(() => {
+                                console.log('After bolid activation - Computed styles:', {
+                                    coverOpacity: window.getComputedStyle(bolidCover).opacity,
+                                    videoOpacity: window.getComputedStyle(bolidVideo).opacity
+                                });
+                            }, 50);
+                        });
+                    }
+
+                    // Function to handle hover/focus deactivation
+                    function deactivateBolidVideo() {
+                        console.log('=== Deactivating bolid video ===');
+
+                        console.log('Setting bolid cover opacity to 1...');
+                        bolidCover.style.opacity = '1';
+                        console.log('Setting bolid video opacity to 0...');
+                        bolidVideo.style.opacity = '0';
+
+                        // Verify computed styles after change
+                        setTimeout(() => {
+                            console.log('After bolid deactivation - Computed styles:', {
+                                coverOpacity: window.getComputedStyle(bolidCover).opacity,
+                                videoOpacity: window.getComputedStyle(bolidVideo).opacity
+                            });
+                        }, 50);
+                    }
+
+                    // Mouse events
+                    bolidImage.addEventListener('mouseenter', function(e) {
+                        console.log('=== Bolid image MOUSEENTER ===');
+                        console.log('Event target:', e.target);
+                        console.log('Event currentTarget:', e.currentTarget);
+                        activateBolidVideo();
+                    });
+
+                    bolidImage.addEventListener('mouseleave', function(e) {
+                        console.log('=== Bolid image MOUSELEAVE ===');
+                        console.log('Event target:', e.target);
+                        console.log('Event currentTarget:', e.currentTarget);
+                        deactivateBolidVideo();
+                    });
+
+                    // Focus events for keyboard navigation
+                    bolidImage.addEventListener('focus', function(e) {
+                        console.log('=== Bolid image FOCUS ===');
+                        console.log('Event target:', e.target);
+                        activateBolidVideo();
+                    });
+
+                    bolidImage.addEventListener('blur', function(e) {
+                        console.log('=== Bolid image BLUR ===');
+                        console.log('Event target:', e.target);
+                        deactivateBolidVideo();
+                    });
+
+                    // Make bolid image focusable
+                    bolidImage.tabIndex = 0;
+                    bolidImage.setAttribute('role', 'button');
+                    bolidImage.setAttribute('aria-label', 'Reveal bolid video');
+
+                } else {
+                    console.error('Bolid card setup failed - Cover or video not found:', {
+                        bolidCover: !!bolidCover,
+                        bolidVideo: !!bolidVideo
+                    });
+                }
+            } else {
+                console.error('Bolid card setup failed - Bolid image not found');
+            }
+        });
+        });
+
+        // Service card hover logging
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            console.log('Service cards found:', serviceCards.length);
+
+            serviceCards.forEach((card, index) => {
+                console.log(`Service card ${index + 1} setup - Element:`, card);
+                console.log(`Service card ${index + 1} computed style before:`, {
+                    transform: window.getComputedStyle(card).transform,
+                    boxShadow: window.getComputedStyle(card).boxShadow,
+                    borderColor: window.getComputedStyle(card).borderColor
+                });
+
+                card.addEventListener('mouseenter', function(e) {
+                    console.log(`=== Service card ${index + 1} MOUSEENTER ===`);
+                    console.log('Event target:', e.target);
+                    console.log('Event currentTarget:', e.currentTarget);
+                    console.log('Card before hover - transform:', window.getComputedStyle(card).transform);
+                    console.log('Card before hover - boxShadow:', window.getComputedStyle(card).boxShadow);
+                    console.log('Card before hover - borderColor:', window.getComputedStyle(card).borderColor);
+
+                    // Log CSS rules that should apply
+                    const computedStyle = window.getComputedStyle(card);
+                    console.log('Expected hover styles:', {
+                        transform: 'translateY(-8px)',
+                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+                        borderColor: 'rgba(255, 255, 255, 0.2)'
+                    });
+
+                    // Force style application
+                    card.style.transform = 'translateY(-8px)';
+                    card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+                    card.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+
+                    // Verify styles applied
+                    setTimeout(() => {
+                        console.log(`Service card ${index + 1} after hover - computed styles:`, {
+                            transform: window.getComputedStyle(card).transform,
+                            boxShadow: window.getComputedStyle(card).boxShadow,
+                            borderColor: window.getComputedStyle(card).borderColor
+                        });
+                    }, 50);
+                });
+
+                card.addEventListener('mouseleave', function(e) {
+                    console.log(`=== Service card ${index + 1} MOUSELEAVE ===`);
+                    console.log('Event target:', e.target);
+                    console.log('Event currentTarget:', e.currentTarget);
+
+                    // Reset styles
+                    card.style.transform = '';
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+
+                    // Verify reset
+                    setTimeout(() => {
+                        console.log(`Service card ${index + 1} after leave - computed styles:`, {
+                            transform: window.getComputedStyle(card).transform,
+                            boxShadow: window.getComputedStyle(card).boxShadow,
+                            borderColor: window.getComputedStyle(card).borderColor
+                        });
+                    }, 50);
+                });
+            });
         });
     </script>
 </body>
