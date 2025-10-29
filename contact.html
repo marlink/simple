@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Marceli Cieplik | UI/UX Designer</title>
+  <meta name="description" content="Contact Marceli Cieplik. Start a WhatsApp chat or send a message via the contact form.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Page-specific small additions */
+    .cta-btn { text-decoration: none; }
+    .whatsapp-card {
+      background: #075e54; /* WhatsApp primary */
+      background: linear-gradient(135deg, #075e54 0%, #128c7e 60%, #25d366 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+    }
+    .whatsapp-card h2 { margin: 0; }
+    .whatsapp-btn {
+      background: #25d366;
+      color: #111;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      padding: 0.9rem 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 8px 24px rgba(37,211,102,.25);
+    }
+    .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(37,211,102,.35); }
+
+    .contact-form {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 2rem;
+      display: grid;
+      gap: 1rem;
+      max-width: 800px;
+      margin: 2rem auto 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,.08);
+      color: #e5e5e5;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      font-family: inherit;
+    }
+    .contact-form button {
+      justify-self: start;
+    }
+
+    .team-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .team-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: grid;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .team-card img {
+      width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin: 0 auto .75rem; border: 2px solid rgba(255,255,255,.2);
+    }
+    .muted { color: #B0B0B0; font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="navbar-left">
+      <a href="index.html" aria-label="Home">
+        <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo" loading="lazy" width="1024" height="768" />
+      </a>
+    </div>
+    <div class="navbar-center">
+      <div class="nav-links">
+        <a href="index.html#hero">Home</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#what">What</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <a class="btn-free-website cta-btn" href="contact.html#form">Free website</a>
+      <div class="login-icon">
+        <img src="img/icons/user.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24" />
+      </div>
+    </div>
+  </nav>
+
+  <main class="content" style="padding-top: 6rem;">
+    <header style="text-align:center; margin-top: 3rem;">
+      <h1 class="section-title">Contact</h1>
+      <p style="max-width:760px;margin:0.75rem auto 0; color:#B0B0B0;">Start a WhatsApp chat or send us a message. We typically respond within one business day.</p>
+    </header>
+
+    <section class="content" style="padding-top:2rem;">
+      <div class="whatsapp-card">
+        <div>
+          <h2>WhatsApp</h2>
+          <p class="muted">Quick chat on WhatsApp in brand colours</p>
+        </div>
+        <a class="whatsapp-btn" href="https://wa.me/48578023466" target="_blank" rel="noopener" aria-label="Start WhatsApp Chat">
+          <span>Start chat</span>
+        </a>
+      </div>
+
+      <form id="form" class="contact-form" onsubmit="event.preventDefault(); alert('Message submitted. Thank you!');">
+        <h2 style="margin:0;">Send a message</h2>
+        <label>
+          <span class="muted">Your message</span>
+          <textarea name="message" rows="4" placeholder="Tell us about your project" required></textarea>
+        </label>
+        <label>
+          <span class="muted">Email or phone</span>
+          <input name="contact" type="text" placeholder="name@example.com or +48 123 456 789" required />
+        </label>
+        <button type="submit" class="btn btn-medium">Send</button>
+      </form>
+
+      <section class="content" style="padding-top:2rem;">
+        <h2 class="section-title" style="text-align:center;">Our team</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="https://i.pravatar.cc/150?img=1" alt="Team member A" />
+            <h3>Marceli Cieplik</h3>
+            <p class="muted">UI/UX Designer</p>
+            <p class="muted">marceli@example.com</p>
+          </div>
+          <div class="team-card">
+            <img src="https://i.pravatar.cc/150?img=2" alt="Team member B" />
+            <h3>Alex Nowak</h3>
+            <p class="muted">Frontend Engineer</p>
+            <p class="muted">alex@example.com</p>
+          </div>
+          <div class="team-card">
+            <img src="https://i.pravatar.cc/150?img=3" alt="Team member C" />
+            <h3>Patricia Zielinska</h3>
+            <p class="muted">Product Manager</p>
+            <p class="muted">patricia@example.com</p>
+          </div>
+          <div class="team-card">
+            <img src="https://i.pravatar.cc/150?img=4" alt="Team member D" />
+            <h3>Omar Kowalski</h3>
+            <p class="muted">QA Specialist</p>
+            <p class="muted">omar@example.com</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <div class="footer-links">
+          <a href="index.html#hero">Home</a>
+          <a href="services.html">Services</a>
+          <a href="index.html#what">What We Do</a>
+          <a href="contact.html" aria-current="page">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">ig</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>About</h3>
+        <p class="footer-description">
+          Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
+          With expertise in creating intuitive interfaces and engaging user journeys,
+          we transform ideas into exceptional digital solutions.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
