@@ -104,7 +104,7 @@
       </div>
     </div>
     <div class="navbar-right">
-      <a class="btn-free-website cta-btn" href="contact.html#form">Free website</a>
+      <a class="btn-free-website cta-btn" href="contact.html#form" style="text-decoration:none;">Free website</a>
       <div class="login-icon">
         <img src="img/icons/user.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24" />
       </div>
@@ -118,30 +118,37 @@
     </header>
 
     <section class="content" style="padding-top:2rem;">
-      <div class="whatsapp-card">
-        <div>
-          <h2>WhatsApp</h2>
-          <p class="muted">Quick chat on WhatsApp in brand colours</p>
+      <div class="two-col" style="display:grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch;">
+        <div class="whatsapp-card">
+          <div>
+            <h2>WhatsApp</h2>
+            <p class="muted">Quick chat on WhatsApp in brand colours</p>
+          </div>
+          <a class="whatsapp-btn" href="https://wa.me/48578023466" target="_blank" rel="noopener" aria-label="Start WhatsApp Chat">
+            <span>Start chat</span>
+          </a>
         </div>
-        <a class="whatsapp-btn" href="https://wa.me/48578023466" target="_blank" rel="noopener" aria-label="Start WhatsApp Chat">
-          <span>Start chat</span>
-        </a>
+
+        <form id="form" class="contact-form" onsubmit="event.preventDefault(); alert('Message submitted. Thank you!');">
+          <h2 style="margin:0;">Send a message</h2>
+          <label>
+            <span class="muted">Your message</span>
+            <textarea name="message" rows="6" placeholder="Tell us about your project" required></textarea>
+          </label>
+          <label>
+            <span class="muted">Email or phone</span>
+            <input name="contact" type="text" placeholder="name@example.com or +48 123 456 789" required />
+          </label>
+          <button type="submit" class="btn btn-medium">Send</button>
+        </form>
       </div>
 
-      <form id="form" class="contact-form" onsubmit="event.preventDefault(); alert('Message submitted. Thank you!');">
-        <h2 style="margin:0;">Send a message</h2>
-        <label>
-          <span class="muted">Your message</span>
-          <textarea name="message" rows="4" placeholder="Tell us about your project" required></textarea>
-        </label>
-        <label>
-          <span class="muted">Email or phone</span>
-          <input name="contact" type="text" placeholder="name@example.com or +48 123 456 789" required />
-        </label>
-        <button type="submit" class="btn btn-medium">Send</button>
-      </form>
-
       <section class="content" style="padding-top:2rem;">
+        <style>
+          @media (min-width: 992px) {
+            .two-col { grid-template-columns: 1fr 1fr !important; }
+          }
+        </style>
         <h2 class="section-title" style="text-align:center;">Our team</h2>
         <div class="team-grid">
           <div class="team-card">
