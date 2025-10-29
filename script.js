@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loading spinner on page load
     showLoadingSpinner();
 
-    // Load all videos normally (remove lazy loading)
-    loadAllVideos();
+    // Setup lazy loading for videos and images using IntersectionObserver
+    setupLazyMediaLoading();
 
     // Hide spinner when page is ready
     window.addEventListener('load', hideLoadingSpinner);
@@ -38,18 +38,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Load all videos normally
-    function loadAllVideos() {
-        // Load all videos with data-src
-        document.querySelectorAll('video[data-src]').forEach(video => {
-            video.src = video.getAttribute('data-src');
-            video.load();
-        });
+    // Lazy load videos and images via IntersectionObserver
+    function setupLazyMediaLoading() {
+        if ('IntersectionObserver' in window) {
+            const onIntersect = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const src = el.getAttribute('data-src');
+                        if (src) {
+                            if (el.tagName === 'VIDEO') {
+                                el.src = src;
+                                el.load();
+                            } else if (el.tagName === 'IMG') {
+                                el.src = src;
+                            }
+                            el.removeAttribute('data-src');
+                        }
+                        observer.unobserve(el);
+                    }
+                });
+            };
 
-        // Load all images with data-src
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            img.src = img.getAttribute('data-src');
-        });
+            const io = new IntersectionObserver(onIntersect, {
+                root: null,
+                rootMargin: '200px',
+                threshold: 0.01
+            });
+
+            document.querySelectorAll('video[data-src], img[data-src]').forEach(el => io.observe(el));
+        } else {
+            // Fallback: load immediately
+            document.querySelectorAll('video[data-src]').forEach(video => {
+                video.src = video.getAttribute('data-src');
+                video.load();
+            });
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                img.src = img.getAttribute('data-src');
+            });
+        }
     }
 
     // Unified hover handlers with cleanup
@@ -237,8 +264,9 @@ function clearNavbarTimeouts() {
 }
 
 // Handle tab visibility change
-const visibilityHandler = function() {
-    if (!document.hidden && isCursorOverNavbar(event)) {
+const visibilityHandler = function(ev) {
+    if (!navbar) return;
+    if (!document.hidden) {
         navbar.classList.remove('hidden');
         clearNavbarTimeouts();
     }
@@ -259,11 +287,14 @@ const navbarLeaveHandler = function() {
         }
     }, 1000);
 };
-navbar.addEventListener('mouseenter', navbarEnterHandler);
-navbar.addEventListener('mouseleave', navbarLeaveHandler);
+if (navbar) {
+    navbar.addEventListener('mouseenter', navbarEnterHandler);
+    navbar.addEventListener('mouseleave', navbarLeaveHandler);
+}
 
 // Track mouse movements
 const mouseMoveHandler = function(event) {
+    if (!navbar) return;
     if (isCursorOverNavbar(event)) {
         clearNavbarTimeouts();
         navbar.classList.remove('hidden');
@@ -291,18 +322,18 @@ document.addEventListener('mousemove', mouseMoveHandler);
     }
 
     // Scroll and resize handlers with cleanup
-    const scrollHandler = function() {
+    const scrollHandler = function(ev) {
         handleVideoVisibility();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         clearNavbarTimeouts();
 
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            if (!isCursorOverNavbar(event)) {
+        if (navbar) {
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
                 scrollTimeout = setTimeout(() => navbar.classList.add('hidden'), 1500);
+            } else {
+                navbar.classList.remove('hidden');
             }
-        } else {
-            navbar.classList.remove('hidden');
         }
 
         lastScrollTop = scrollTop;
@@ -319,8 +350,10 @@ document.addEventListener('mousemove', mouseMoveHandler);
     window.addEventListener('beforeunload', () => {
         clearNavbarTimeouts();
         document.removeEventListener('visibilitychange', visibilityHandler);
-        navbar.removeEventListener('mouseenter', navbarEnterHandler);
-        navbar.removeEventListener('mouseleave', navbarLeaveHandler);
+        if (navbar) {
+            navbar.removeEventListener('mouseenter', navbarEnterHandler);
+            navbar.removeEventListener('mouseleave', navbarLeaveHandler);
+        }
         document.removeEventListener('mousemove', mouseMoveHandler);
         window.removeEventListener('scroll', scrollHandler);
         window.removeEventListener('resize', resizeHandler);
