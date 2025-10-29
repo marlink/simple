@@ -65,28 +65,49 @@ document.addEventListener('DOMContentLoaded', function() {
         trigger.addEventListener('mouseenter', enterHandler);
         trigger.addEventListener('mouseleave', leaveHandler);
 
+        // Add touch support
+        trigger.addEventListener('touchstart', enterHandler);
+        trigger.addEventListener('touchend', leaveHandler);
+
         // Return cleanup function
         return () => {
             trigger.removeEventListener('mouseenter', enterHandler);
             trigger.removeEventListener('mouseleave', leaveHandler);
+            trigger.removeEventListener('touchstart', enterHandler);
+            trigger.removeEventListener('touchend', leaveHandler);
             clearTimeout(hideTimeout);
         };
     }
 
-    // Navbar logo hover
+    // Navbar logo hover with delay and touch
     const navbarLogo = document.querySelector('.navbar-logo');
     const coverImage = document.querySelector('.cover-image');
     const videoBg = document.querySelector('.video-bg');
+    let videoHideTimeout;
     if (navbarLogo && coverImage && videoBg) {
-        navbarLogo.addEventListener('mouseenter', () => {
+        const enterHandler = () => {
+            clearTimeout(videoHideTimeout);
             coverImage.style.opacity = '0';
             videoBg.style.opacity = '1';
             videoBg.play().catch(() => {});
-        });
-        navbarLogo.addEventListener('mouseleave', () => {
+        };
+        const leaveHandler = () => {
+            videoHideTimeout = setTimeout(() => {
+                coverImage.style.opacity = '1';
+                videoBg.style.opacity = '0';
+                videoBg.pause();
+            }, 500);
+        };
+        navbarLogo.addEventListener('mouseenter', enterHandler);
+        navbarLogo.addEventListener('mouseleave', leaveHandler);
+        navbarLogo.addEventListener('touchstart', enterHandler);
+        navbarLogo.addEventListener('touchend', leaveHandler);
+
+        // Error handling for video
+        videoBg.addEventListener('error', () => {
+            console.error('Video playback failed');
+            videoBg.style.display = 'none';
             coverImage.style.opacity = '1';
-            videoBg.style.opacity = '0';
-            videoBg.pause();
         });
     }
 
@@ -107,16 +128,92 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             heroSection.addEventListener('mouseenter', sectionEnter);
             heroSection.addEventListener('mouseleave', sectionLeave);
+            heroSection.addEventListener('touchstart', sectionEnter);
+            heroSection.addEventListener('touchend', sectionLeave);
 
             // Store cleanup for potential future use
             window.addEventListener('beforeunload', () => {
                 cleanupHover();
                 heroSection.removeEventListener('mouseenter', sectionEnter);
                 heroSection.removeEventListener('mouseleave', sectionLeave);
+                heroSection.removeEventListener('touchstart', sectionEnter);
+                heroSection.removeEventListener('touchend', sectionLeave);
                 clearTimeout(sectionHideTimeout);
             });
         }
     }
+
+    // Bolid card hover/focus functionality
+    // Find the first zigzag-image that has a video (bolid card)
+    const zigzagImages = document.querySelectorAll('.zigzag-image');
+    const bolidImage = zigzagImages[0]; // First one with bolid video
+    let bolidHideTimeout;
+    if (bolidImage) {
+        const bolidCover = bolidImage.querySelector('img');
+        const bolidVideo = bolidImage.querySelector('.zigzag-video');
+
+        if (bolidCover && bolidVideo) {
+            // Function to handle hover/focus activation
+            function activateBolidVideo() {
+                clearTimeout(bolidHideTimeout);
+                bolidCover.style.opacity = '0';
+                bolidVideo.style.opacity = '1';
+                bolidVideo.play().catch(() => {});
+            }
+
+            // Function to handle hover/focus deactivation
+            function deactivateBolidVideo() {
+                bolidHideTimeout = setTimeout(() => {
+                    bolidCover.style.opacity = '1';
+                    bolidVideo.style.opacity = '0';
+                    bolidVideo.pause();
+                }, 500);
+            }
+
+            // Mouse events
+            bolidImage.addEventListener('mouseenter', activateBolidVideo);
+            bolidImage.addEventListener('mouseleave', deactivateBolidVideo);
+
+            // Touch events
+            bolidImage.addEventListener('touchstart', activateBolidVideo);
+            bolidImage.addEventListener('touchend', deactivateBolidVideo);
+
+            // Focus events for keyboard navigation
+            bolidImage.addEventListener('focus', activateBolidVideo);
+            bolidImage.addEventListener('blur', deactivateBolidVideo);
+
+            // Make bolid image focusable
+            bolidImage.tabIndex = 0;
+            bolidImage.setAttribute('role', 'button');
+            bolidImage.setAttribute('aria-label', 'Reveal bolid video');
+
+            // Error handling for bolid video
+            bolidVideo.addEventListener('error', () => {
+                console.error('Bolid video playback failed');
+                bolidVideo.style.display = 'none';
+                bolidCover.style.opacity = '1';
+            });
+        }
+    }
+
+    // Service card hover
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        const enterHandler = () => {
+            card.style.transform = 'translateY(-8px)';
+            card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            card.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        };
+        const leaveHandler = () => {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+            card.style.borderColor = '';
+        };
+        card.addEventListener('mouseenter', enterHandler);
+        card.addEventListener('mouseleave', leaveHandler);
+        card.addEventListener('touchstart', enterHandler);
+        card.addEventListener('touchend', leaveHandler);
+    });
 });
 
 // Navbar scroll behavior with cleanup
@@ -228,75 +325,3 @@ document.addEventListener('mousemove', mouseMoveHandler);
         window.removeEventListener('scroll', scrollHandler);
         window.removeEventListener('resize', resizeHandler);
     });
-
-// Bolid card hover/focus functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Find the first zigzag-image that has a video (bolid card)
-    const zigzagImages = document.querySelectorAll('.zigzag-image');
-    const bolidImage = zigzagImages[0]; // First one with bolid video
-
-    if (bolidImage) {
-        const bolidCover = bolidImage.querySelector('img');
-        const bolidVideo = bolidImage.querySelector('.zigzag-video');
-
-        if (bolidCover && bolidVideo) {
-
-            // Function to handle hover/focus activation
-            function activateBolidVideo() {
-                bolidCover.style.opacity = '0';
-                bolidVideo.style.opacity = '1';
-                bolidVideo.play().catch(() => {});
-            }
-
-            // Function to handle hover/focus deactivation
-            function deactivateBolidVideo() {
-                bolidCover.style.opacity = '1';
-                bolidVideo.style.opacity = '0';
-                bolidVideo.pause();
-            }
-
-            // Mouse events
-            bolidImage.addEventListener('mouseenter', function(e) {
-                activateBolidVideo();
-            });
-
-            bolidImage.addEventListener('mouseleave', function(e) {
-                deactivateBolidVideo();
-            });
-
-            // Focus events for keyboard navigation
-            bolidImage.addEventListener('focus', function(e) {
-                activateBolidVideo();
-            });
-
-            bolidImage.addEventListener('blur', function(e) {
-                deactivateBolidVideo();
-            });
-
-            // Make bolid image focusable
-            bolidImage.tabIndex = 0;
-            bolidImage.setAttribute('role', 'button');
-            bolidImage.setAttribute('aria-label', 'Reveal bolid video');
-
-        }
-    }
-});
-
-// Service card hover logging
-document.addEventListener('DOMContentLoaded', function() {
-    const serviceCards = document.querySelectorAll('.service-card');
-
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-8px)';
-            card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
-            card.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.boxShadow = '';
-            card.style.borderColor = '';
-        });
-    });
-});
