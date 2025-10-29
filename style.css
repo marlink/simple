@@ -280,12 +280,16 @@
         }
 
         .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             opacity: 0;
             transition: opacity 1s ease;
             will-change: opacity; /* Optimize for animations */
+            z-index: 1;
         }
 
         /* Loading spinner styles */
@@ -349,7 +353,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 2;
+            z-index: 2; /* below overlay */
             transition: opacity 1s ease;
             border-radius: 12px;
         }
@@ -361,7 +365,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
-            z-index: 2;
+            z-index: 3; /* above cover, below logo */
             pointer-events: none;
         }
 
