@@ -152,17 +152,75 @@ function handleVideoError() {
 function setupHeroLogoHover() {
     const heroLogoContainer = document.querySelector('.hero-logo-container');
     const designerInfo = document.querySelector('.designer-info');
+    const coverImage = document.querySelector('.cover-image');
+    const videoBg = document.querySelector('.video-bg');
     
     if (!heroLogoContainer || !designerInfo) return;
     
     const enterHandler = () => {
+        // Hide cover image and show video (same as navbar logo)
+        if (coverImage && videoBg) {
+            coverImage.style.opacity = '0';
+            videoBg.style.opacity = '1';
+            videoBg.play().catch(() => {});
+        }
+        
+        // Show designer info with fade effect for Marceli Cieplik name
         setTimeout(() => {
             designerInfo.style.opacity = '1';
             designerInfo.style.visibility = 'visible';
+            
+            // Animate the designer name fade away
+            const designerName = designerInfo.querySelector('.designer-name');
+            if (designerName) {
+                setTimeout(() => {
+                    designerName.style.transition = 'opacity 2s ease-out, transform 2s ease-out';
+                    designerName.style.opacity = '0';
+                    designerName.style.transform = 'translateY(20px)';
+                }, 1000);
+            }
         }, 200);
+        
+        // Add animation for UI/UX designer sub-heading (appears with delay)
+        const designerTitle = designerInfo.querySelector('.designer-title');
+        if (designerTitle) {
+            designerTitle.style.transition = 'none';
+            designerTitle.style.transform = 'translateY(20px)';
+            designerTitle.style.opacity = '0';
+            
+            setTimeout(() => {
+                designerTitle.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                designerTitle.style.opacity = '0.8';
+                designerTitle.style.transform = 'translateY(0)';
+            }, 1500);
+        }
     };
     
     const leaveHandler = () => {
+        // Restore cover image and hide video
+        if (coverImage && videoBg) {
+            setTimeout(() => {
+                coverImage.style.opacity = '1';
+                videoBg.style.opacity = '0';
+                videoBg.pause();
+            }, 500);
+        }
+        
+        // Reset designer name opacity for next time
+        const designerName = designerInfo.querySelector('.designer-name');
+        if (designerName) {
+            designerName.style.opacity = '1';
+        }
+        
+        // Animate UI/UX designer sub-heading to disappear (fade and move down)
+        const designerTitle = designerInfo.querySelector('.designer-title');
+        if (designerTitle) {
+            designerTitle.style.transition = 'opacity 0.8s ease-in, transform 0.8s ease-in';
+            designerTitle.style.opacity = '0';
+            designerTitle.style.transform = 'translateY(20px)';
+        }
+        
+        // Hide designer info after animations
         setTimeout(() => {
             designerInfo.style.opacity = '0';
             designerInfo.style.visibility = 'hidden';
@@ -271,7 +329,11 @@ function setupNavbarBehavior() {
     navbar.addEventListener('mouseleave', () => {
         interactionTimeout = setTimeout(() => {
             hideTimeout = setTimeout(() => {
-                navbar.classList.add('hidden');
+                // Only hide if we're not at the top of the page
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 100) {
+                    navbar.classList.add('hidden');
+                }
             }, 2000);
         }, 1000);
     });
@@ -283,11 +345,18 @@ function setupNavbarBehavior() {
         clearTimeout(hideTimeout);
         clearTimeout(interactionTimeout);
         
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Always show navbar when at the top of the page (or very close to it)
+        if (scrollTop <= 10) {
+            navbar.classList.remove('hidden');
+        }
+        // Only hide navbar when scrolling down and we're past the top
+        else if (scrollTop > lastScrollTop && scrollTop > 100) {
             hideTimeout = setTimeout(() => {
                 navbar.classList.add('hidden');
             }, 1500);
-        } else {
+        }
+        // Show navbar when scrolling up
+        else {
             navbar.classList.remove('hidden');
         }
         
