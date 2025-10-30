@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Essential Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>Page Title — Marceli Cieplik | UI/UX Designer</title>
+    <meta name="description" content="Portfolio page description. Modern, responsive portfolio showcasing design work.">
+    <meta name="keywords" content="UI/UX, Designer, Portfolio, Web Design, Mobile Design">
+    <meta name="author" content="Marceli Cieplik">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags (Social Media) -->
+    <meta property="og:title" content="Page Title — Marceli Cieplik | UI/UX Designer">
+    <meta property="og:description" content="Portfolio page description">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marlink.github.io/simple/">
+    <meta property="og:image" content="img/logo/mc-logo.svg">
+    <meta property="og:site_name" content="Marceli Cieplik Portfolio">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Page Title — Marceli Cieplik">
+    <meta name="twitter:description" content="Portfolio page description">
+    <meta name="twitter:image" content="img/logo/mc-logo.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="img/logo/mc-logo.svg">
+    <link rel="alternate icon" href="favicon.ico">
+
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- DNS Prefetch for Performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/style.min.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+
+    <!-- Google Fonts - Optimized Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.min.css">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#020305">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Marceli Cieplik",
+      "jobTitle": "UI/UX Designer",
+      "url": "https://marlink.github.io/simple/",
+      "sameAs": [
+        "https://www.linkedin.com/in/marcelik",
+        "https://twitter.com/marcelik"
+      ]
+    }
+    </script>
+</head>
+
+<body class="loading">
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-to-main visually-hidden">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <!-- Left: Logo -->
+        <div class="navbar-left">
+            <a href="index.html" aria-label="Home - Marceli Cieplik Portfolio">
+                <img src="img/logo/mc-logo.svg"
+                     alt="MC Logo"
+                     class="navbar-logo"
+                     loading="eager"
+                     width="1024"
+                     height="768">
+            </a>
+        </div>
+
+        <!-- Center: Navigation Links -->
+        <div class="navbar-center">
+            <div class="nav-links">
+                <a href="index.html#hero" aria-current="page">Home</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="labs.html">Labs</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+
+        <!-- Right: CTA + Login -->
+        <div class="navbar-right">
+            <a class="btn btn-outline btn-small"
+               href="contact.html#form"
+               aria-label="Get a free website consultation">
+                Free website
+            </a>
+            <div class="login-icon" role="button" tabindex="0" aria-label="User login">
+                <img src="img/icons/login.svg"
+                     alt=""
+                     class="user-icon"
+                     loading="lazy"
+                     width="24"
+                     height="24"
+                     aria-hidden="true">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+
+        <!-- Hero Section -->
+        <section class="hero" id="hero" aria-labelledby="hero-heading">
+            <div class="hero-logo-container">
+                <div class="hero-logo">
+                    <img src="img/logo/mc-logo.svg"
+                         alt="MC Logo"
+                         class="mc-logo-hero preload"
+                         tabindex="0"
+                         loading="eager"
+                         width="1024"
+                         height="768">
+                </div>
+                <div class="hidden-heading">
+                    <div class="designer-info">
+                        <h1 id="hero-heading" class="designer-name">Marceli Cieplik</h1>
+                        <h2 class="designer-title">UI/UX designer</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <!-- Cover Image (shown initially) -->
+                <img src="img/black-rider.png"
+                     alt="Portfolio showcase cover"
+                     class="cover-image preload"
+                     loading="eager"
+                     width="1862"
+                     height="1060">
+
+                <!-- Gradient overlay -->
+                <div class="hero-gradient-overlay" aria-hidden="true"></div>
+
+                <!-- Video Background (lazy loaded) -->
+                <video class="video-bg lazy-loading"
+                       data-src="vid/rider/black-rider.mp4"
+                       muted
+                       loop
+                       playsinline
+                       preload="none"
+                       aria-label="Background video">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Content Section Example -->
+        <section class="section" id="content-section" aria-labelledby="content-heading">
+            <div class="container">
+                <h2 id="content-heading" class="section-title">Section Title</h2>
+                <p class="page-description">
+                    This is a description paragraph that provides context for the section content.
+                </p>
+
+                <!-- Example Grid of Cards -->
+                <div class="grid-3">
+                    <article class="card">
+                        <h3>Card Title 1</h3>
+                        <p>Card description goes here with relevant content information.</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Card Title 2</h3>
+                        <p>Card description goes here with relevant content information.</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Card Title 3</h3>
+                        <p>Card description goes here with relevant content information.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Green Cards Section (Example) -->
+        <section class="green-cards-section" aria-labelledby="services-heading">
+            <div class="green-cards-container">
+                <h2 id="services-heading" class="visually-hidden">Services</h2>
+                <div class="green-cards-grid">
+                    <article class="green-card">
+                        <h3 class="card-heading-bottom">
+                            <span class="card-main-text">WEB</span>
+                            <span class="card-sub-text">SITES</span>
+                        </h3>
+                    </article>
+
+                    <article class="green-card">
+                        <h3 class="card-heading-bottom">
+                            <span class="card-main-text">MOBILE</span>
+                            <span class="card-sub-text">APPS</span>
+                        </h3>
+                    </article>
+
+                    <article class="green-card">
+                        <h3 class="card-heading-bottom">
+                            <span class="card-main-text">AI/LLM</span>
+                            <span class="card-sub-text">TOOLS</span>
+                        </h3>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (Optional) -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Marceli Cieplik. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner (Will be created by JavaScript) -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; width: 100%; background: #020305; color: #E5E5E5; padding: 1rem; text-align: center; z-index: 9999;">
+            <p>JavaScript</p> is required for full functionality. Please enable JavaScript in your browser.</p>
+        </div>
+    </noscript>
+
+    <!-- Scripts - Optimized Loading -->
+    <script src="js/main.js" defer></script>
+
+    <!-- Performance Optimization: Resource Hints -->
+    <link rel="prefetch" href="services.html">
+    <link rel="prefetch" href="blog.html">
+
+</body>
+</html>

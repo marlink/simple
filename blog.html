@@ -1,202 +1,349 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Marceli Cieplik — UI/UX Designer</title>
-    <meta name="description" content="Blog articles on UI/UX design, web development, and modern design trends by Marceli Cieplik.">
-    <meta property="og:title" content="Blog | Marceli Cieplik — UI/UX Designer">
-    <meta property="og:description" content="Blog articles on UI/UX design, web development, and modern design trends.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://marlink.github.io/simple/blog.html">
-    <meta property="og:image" content="img/logo/mc-logo.svg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Blog | Marceli Cieplik — UI/UX Designer">
-    <meta name="twitter:description" content="Blog articles on UI/UX design, web development, and modern design trends.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Top Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-left">
-            <a href="index.html">
-                <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo" loading="lazy" width="1024" height="768">
-            </a>
-        </div>
-        <div class="navbar-center">
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="blog.html" class="active">Blog</a>
-                <a href="contact.html">Contact</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog | Marceli Cieplik — UI/UX Designer</title>
+        <meta
+            name="description"
+            content="Blog articles on UI/UX design, web development, and modern design trends by Marceli Cieplik."
+        />
+        <meta
+            property="og:title"
+            content="Blog | Marceli Cieplik — UI/UX Designer"
+        />
+        <meta
+            property="og:description"
+            content="Blog articles on UI/UX design, web development, and modern design trends."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://marlink.github.io/simple/blog.html"
+        />
+        <meta property="og:image" content="img/logo/mc-logo.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Blog | Marceli Cieplik — UI/UX Designer"
+        />
+        <meta
+            name="twitter:description"
+            content="Blog articles on UI/UX design, web development, and modern design trends."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-left">
+                <a href="index.html">
+                    <img
+                        src="img/logo/mc-logo.svg"
+                        alt="MC Logo"
+                        class="navbar-logo"
+                        loading="lazy"
+                        width="1024"
+                        height="768"
+                    />
+                </a>
             </div>
-        </div>
-        <div class="navbar-right">
-            <a class="btn-free-website cta-btn" href="contact.html#form">Free website</a>
-            <div class="login-icon">
-                <img src="img/icons/login.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24">
-            </div>
-        </div>
-    </nav>
-
-    <!-- Blog Header -->
-    <header class="blog-header">
-        <div class="container">
-            <h1>The Design & Code Blog</h1>
-            <p>Exploring UI/UX, development, and the future of digital experiences.</p>
-        </div>
-    </header>
-
-    <!-- Blog Grid -->
-    <main class="blog-grid container">
-        <div class="blog-card">
-            <a href="blog-article-1.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=Native+vs+Hybrid" alt="Native vs Hybrid Development" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">Mobile</span>
-                    <span class="tag">Development</span>
-                    <span class="tag">Design</span>
-                </div>
-                <h2><a href="blog-article-1.html">Native vs. Hybrid: The Debate That Never Died</a></h2>
-                <p>A personal story from 2012 about the fundamental choice between building separate native apps or a unified hybrid solution - and what it means for product design today.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>Santander</span>
-                    <span class="date">Nov 2014 – Jan 2017 (2 years, 3 months)</span>
-                </div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <a href="blog-article-2.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=Speed+%26+Consistency" alt="Speed & Consistency" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">Development</span>
-                    <span class="tag">Frameworks</span>
-                </div>
-                <h2><a href="blog-article-2.html">Speed & Consistency - Bootstrapping and Power of Frameworks</a></h2>
-                <p>Exploring how modern frameworks accelerate development while maintaining design consistency across projects and platforms.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>Various Projects</span>
-                    <span class="date">2015-2016</span>
-                </div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <a href="blog-article-3.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=If+it+takes+longer+than+a+day" alt="Prototype Speed" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">Prototyping</span>
-                    <span class="tag">Process</span>
-                </div>
-                <h2><a href="blog-article-3.html">If it Takes Longer Than a Day - is Not a Prototype</a></h2>
-                <p>Why rapid prototyping is crucial for validation, and how to balance speed with meaningful user testing and iteration.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>Multiple Clients</span>
-                    <span class="date">2016-2017</span>
-                </div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <a href="blog-article-4.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=TUI+Redesign" alt="TUI Website Redesign" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">Case Study</span>
-                    <span class="tag">Travel</span>
-                    <span class="tag">E-commerce</span>
-                </div>
-                <h2><a href="blog-article-4.html">Case Study: TUI Website Redesign</a></h2>
-                <p>Redesigning a multi-million-pound website for the UK's leading holiday brands was both a challenge and a breakthrough moment for large-scale travel brands.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>TUI Travel</span>
-                    <span class="date">2010-2013</span>
-                </div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <a href="blog-article-5.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=End+Users+in+Room" alt="User Research" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">UX Research</span>
-                    <span class="tag">Education</span>
-                </div>
-                <h2><a href="blog-article-5.html">Luxury of Having End Users in a Room: Teacher, Student, Parent Paradigm</a></h2>
-                <p>The power of direct user observation and how having end users physically present transforms design decisions and product strategy.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>Educational Sector</span>
-                    <span class="date">2017-2018</span>
-                </div>
-            </div>
-        </div>
-        <div class="blog-card">
-            <a href="blog-article-6.html" class="blog-card-image-link">
-                <img src="https://placehold.co/600x400/020305/FFF?text=Fixing+UX+Last+Resort" alt="UX Emergency" loading="lazy">
-            </a>
-            <div class="blog-card-content">
-                <div class="blog-card-tags">
-                    <span class="tag">Crisis Management</span>
-                    <span class="tag">Brand Recovery</span>
-                </div>
-                <h2><a href="blog-article-6.html">Fixing UX as the Approach of the Last Resort - When Brand Dies Organically</a></h2>
-                <p>When user experience fixes become emergency interventions to save failing products, and how to rebuild trust through design.</p>
-                <div class="blog-card-author">
-                    <img src="img/icons/user.svg" alt="Client" loading="lazy">
-                    <span>Multiple Recovery Projects</span>
-                    <span class="date">2018-2019</span>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Navigation</h3>
-                <div class="footer-links">
+            <div class="navbar-center">
+                <div class="nav-links">
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
-                    <a href="blog.html">Blog</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="index.html#what">What</a>
+                    <a href="labs.html">Labs</a>
+                    <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn">in</a>
-                    <a href="#" aria-label="Twitter">t</a>
-                    <a href="#" aria-label="Instagram">ig</a>
+            <div class="navbar-right">
+                <a class="btn btn-outline btn-small" href="contact.html#form"
+                    >Free website</a
+                >
+                <div class="login-icon">
+                    <img
+                        src="img/icons/login.svg"
+                        alt="User Login"
+                        class="user-icon"
+                        loading="lazy"
+                        width="24"
+                        height="24"
+                    />
                 </div>
             </div>
+        </nav>
 
-            <div class="footer-section">
-                <h3>About</h3>
-                <p class="footer-description">
-                    Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
-                    With expertise in creating intuitive interfaces and engaging user journeys,
-                    we transform ideas into exceptional digital solutions.
+        <!-- Blog Header -->
+        <header class="blog-header">
+            <div class="container">
+                <h1>The Design & Code Blog</h1>
+                <p>
+                    Exploring UI/UX, development, and the future of digital
+                    experiences.
                 </p>
             </div>
-        </div>
-    </footer>
+        </header>
 
-    <script defer src="script.js"></script>
-</body>
+        <!-- Blog Grid -->
+        <main class="blog-grid container">
+            <div class="blog-card">
+                <a href="blog-article-1.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=Native+vs+Hybrid"
+                        alt="Native vs Hybrid Development"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">Mobile</span>
+                        <span class="tag">Development</span>
+                        <span class="tag">Design</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-1.html"
+                            >Native vs. Hybrid: The Debate That Never Died</a
+                        >
+                    </h2>
+                    <p>
+                        A personal story from 2012 about the fundamental choice
+                        between building separate native apps or a unified
+                        hybrid solution - and what it means for product design
+                        today.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>Santander</span>
+                        <span class="date"
+                            >Nov 2014 – Jan 2017 (2 years, 3 months)</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a href="blog-article-2.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=Speed+%26+Consistency"
+                        alt="Speed & Consistency"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">Development</span>
+                        <span class="tag">Frameworks</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-2.html"
+                            >Speed & Consistency - Bootstrapping and Power of
+                            Frameworks</a
+                        >
+                    </h2>
+                    <p>
+                        Exploring how modern frameworks accelerate development
+                        while maintaining design consistency across projects and
+                        platforms.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>Various Projects</span>
+                        <span class="date">2015-2016</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a href="blog-article-3.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=If+it+takes+longer+than+a+day"
+                        alt="Prototype Speed"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">Prototyping</span>
+                        <span class="tag">Process</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-3.html"
+                            >If it Takes Longer Than a Day - is Not a
+                            Prototype</a
+                        >
+                    </h2>
+                    <p>
+                        Why rapid prototyping is crucial for validation, and how
+                        to balance speed with meaningful user testing and
+                        iteration.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>Multiple Clients</span>
+                        <span class="date">2016-2017</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a href="blog-article-4.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=TUI+Redesign"
+                        alt="TUI Website Redesign"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">Case Study</span>
+                        <span class="tag">Travel</span>
+                        <span class="tag">E-commerce</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-4.html"
+                            >Case Study: TUI Website Redesign</a
+                        >
+                    </h2>
+                    <p>
+                        Redesigning a multi-million-pound website for the UK's
+                        leading holiday brands was both a challenge and a
+                        breakthrough moment for large-scale travel brands.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>TUI Travel</span>
+                        <span class="date">2010-2013</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a href="blog-article-5.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=End+Users+in+Room"
+                        alt="User Research"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">UX Research</span>
+                        <span class="tag">Education</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-5.html"
+                            >Luxury of Having End Users in a Room: Teacher,
+                            Student, Parent Paradigm</a
+                        >
+                    </h2>
+                    <p>
+                        The power of direct user observation and how having end
+                        users physically present transforms design decisions and
+                        product strategy.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>Educational Sector</span>
+                        <span class="date">2017-2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a href="blog-article-6.html" class="blog-card-image-link">
+                    <img
+                        src="https://placehold.co/600x400/020305/FFF?text=Fixing+UX+Last+Resort"
+                        alt="UX Emergency"
+                        loading="lazy"
+                    />
+                </a>
+                <div class="blog-card-content">
+                    <div class="blog-card-tags">
+                        <span class="tag">Crisis Management</span>
+                        <span class="tag">Brand Recovery</span>
+                    </div>
+                    <h2>
+                        <a href="blog-article-6.html"
+                            >Fixing UX as the Approach of the Last Resort - When
+                            Brand Dies Organically</a
+                        >
+                    </h2>
+                    <p>
+                        When user experience fixes become emergency
+                        interventions to save failing products, and how to
+                        rebuild trust through design.
+                    </p>
+                    <div class="blog-card-author">
+                        <img
+                            src="img/icons/user.svg"
+                            alt="Client"
+                            loading="lazy"
+                        />
+                        <span>Multiple Recovery Projects</span>
+                        <span class="date">2018-2019</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="Twitter">t</a>
+                        <a href="#" aria-label="Instagram">ig</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p class="footer-description">
+                        Marceli Cieplik is a UI/UX Designer specializing in
+                        modern web experiences. With expertise in creating
+                        intuitive interfaces and engaging user journeys, we
+                        transform ideas into exceptional digital solutions.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script defer src="script.js"></script>
+    </body>
 </html>

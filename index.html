@@ -1,258 +1,407 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marceli Cieplik — UI/UX Designer | Portfolio</title>
-    <meta name="description" content="Portfolio of Marceli Cieplik, UI/UX Designer. Modern web, mobile, and AI experiences with strong visual design and usability.">
-    <meta property="og:title" content="Marceli Cieplik — UI/UX Designer | Portfolio">
-    <meta property="og:description" content="Modern, responsive portfolio showcasing web, mobile, and AI design work by Marceli Cieplik.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://marlink.github.io/simple/">
-    <meta property="og:image" content="img/logo/mc-logo.svg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Marceli Cieplik — UI/UX Designer | Portfolio">
-    <meta name="twitter:description" content="Modern, responsive portfolio showcasing web, mobile, and AI design work.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Top Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-left">
-            <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo" loading="lazy" width="1024" height="768">
-        </div>
-        <div class="navbar-center">
-            <div class="nav-links">
-                <a href="#hero" class="active">Home</a>
-                <a href="services.html">Services</a>
-                <a href="blog.html">Blog</a>
-                <a href="#what">What</a>
-                <a href="labs.html">Labs</a>
-                <a href="contact.html">Contact</a>
-                <a href="about.html">About</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Marceli Cieplik — UI/UX Designer | Portfolio</title>
+        <meta
+            name="description"
+            content="Portfolio of Marceli Cieplik, UI/UX Designer. Modern web, mobile, and AI experiences with strong visual design and usability."
+        />
+        <meta
+            property="og:title"
+            content="Marceli Cieplik — UI/UX Designer | Portfolio"
+        />
+        <meta
+            property="og:description"
+            content="Modern, responsive portfolio showcasing web, mobile, and AI design work by Marceli Cieplik."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://marlink.github.io/simple/" />
+        <meta property="og:image" content="img/logo/mc-logo.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Marceli Cieplik — UI/UX Designer | Portfolio"
+        />
+        <meta
+            name="twitter:description"
+            content="Modern, responsive portfolio showcasing web, mobile, and AI design work."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-left">
+                <img
+                    src="img/logo/mc-logo.svg"
+                    alt="MC Logo"
+                    class="navbar-logo"
+                    loading="lazy"
+                    width="1024"
+                    height="768"
+                />
             </div>
-        </div>
-        <div class="navbar-right">
-            <a class="btn-outline btn-small cta-btn" href="contact.html#form">Free website</a>
-            <div class="login-icon">
-                <img src="img/icons/login.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24">
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Hero Section with Video Background -->
-    <section class="hero" id="hero">
-        <div class="hero-logo-container">
-            <div class="hero-logo">
-                <img src="img/logo/mc-logo.svg" alt="MC Logo" class="mc-logo-hero" tabindex="0" loading="lazy" width="1024" height="768">
-            </div>
-            <div class="hidden-heading">
-                <div class="designer-info">
-                    <h1 class="designer-name">Marceli Cieplik</h1>
-                    <h2 class="designer-title">UI/UX designer</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="video-container">
-            <!-- Cover Image (shown initially) -->
-            <img src="img/black-rider.png" alt="Black Rider cover" class="cover-image" loading="lazy" width="1862" height="1060">
-
-            <!-- Gradient overlay above cover image -->
-            <div class="hero-gradient-overlay"></div>
-
-            <!-- Video Background (revealed on hover) - lazy loaded -->
-            <video class="video-bg lazy-loading" data-src="vid/rider/black-rider.mp4" muted loop playsinline preload="none">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </section>
-
-    <!-- Green Cards Section -->
-    <section class="green-cards-section">
-        <div class="green-cards-container">
-            <div class="green-cards-grid">
-                <div class="green-card">
-                    <h4 class="card-heading-top"></h4>
-                    <h3 class="card-heading-bottom">
-                        <span class="card-main-text">WEB</span> 
-                        <span class="card-sub-text">SITES</span>
-                    </h3>
-                </div>
-                <div class="green-card">
-                    <h4 class="card-heading-top"></h4>
-                    <h3 class="card-heading-bottom">
-                        <span class="card-main-text">MOBILE</span> 
-                        <span class="card-sub-text">APPS</span>
-                    </h3>
-                </div>
-                <div class="green-card">
-                    <h4 class="card-heading-top"></h4>
-                    <h3 class="card-heading-bottom">
-                        <span class="card-main-text">AI/LLM</span> 
-                        <span class="card-sub-text">TOOLS</span>
-                    </h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Cards Section -->
-    <section class="services-section" id="services">
-        <div class="services-container">
-            <h2 class="services-title">12+ years blending design, tech, and strategic insight to create smarter, human-centered digital products.</h2>
-                <p class="services-subtitle">I tackle challenges holistically—from code to research—to deliver simple, practical, and satisfying software & solutions.</p>
-            <div class="services-cards">
-                <div class="service-card">
-                    <div class="card-content">
-                        <h3>WEB SITES</h3>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="card-content">
-                        <h3>MOBILE APPS</h3>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="card-content">
-                        <h3>AI/LLM TOOLS</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partner Logos Section -->
-    <section class="logos-section">
-        <div class="logos-container">
-            <div class="logos-grid">
-                <div class="logo-item">
-                    <img src="img/logo/superbet-light.svg" alt="Superbet" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/tui-travel.svg" alt="TUI Travel" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/barclays.svg" alt="Barclays" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/pokerstars.svg" alt="PokerStars" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/mmb-mini.svg" alt="MMB" class="partner-logo" tabindex="0" loading="lazy" width="80" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/pearson-wh.svg" alt="Pearson" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/costa_coffee-red.png" alt="Costa Coffee" class="partner-logo" tabindex="0" loading="lazy" width="100" height="40">
-                </div>
-                <div class="logo-item">
-                    <img src="img/logo/santander.svg" alt="Santander" class="partner-logo" tabindex="0" loading="lazy" width="120" height="40">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What Section -->
-    <section class="what-section" id="what">
-        <div class="zigzag-container">
-            <div class="zigzag-item">
-                <div class="zigzag-image">
-                    <img src="img/bolid.jpeg" alt="What we create" loading="lazy" width="1920" height="1080">
-                    <video class="zigzag-video lazy-loading" data-src="vid/formula/bolid.mp4" muted loop playsinline preload="none">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="zigzag-text">
-                    <h3>What We Create</h3>
-                    <p>We build stunning digital experiences that captivate and engage users across all platforms and devices.</p>
-                </div>
-            </div>
-            <div class="zigzag-item zigzag-reverse">
-                <div class="zigzag-text">
-                    <h3>What We Deliver</h3>
-                    <p>Our solutions are crafted with precision, ensuring scalability, performance, and exceptional user experiences.</p>
-                </div>
-                <div class="zigzag-image">
-                    <img src="img/black-rider.png" alt="What we deliver" loading="lazy" width="1862" height="1060">
-                </div>
-            </div>
-            <div class="zigzag-item">
-                <div class="zigzag-image">
-                    <img src="img/black-rider.png" alt="What we achieve" loading="lazy" width="1862" height="1060">
-                </div>
-                <div class="zigzag-text">
-                    <h3>What We Achieve</h3>
-                    <p>We transform ideas into reality, helping businesses grow and succeed in the digital landscape.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Section -->
-    <section class="content">
-        <h2 class="section-title">Our Services</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>Web Design</h3>
-                <p>Creating beautiful, responsive websites that provide exceptional user experiences across all devices.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Development</h3>
-                <p>Building robust, scalable applications using the latest technologies and best practices.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Digital Marketing</h3>
-                <p>Driving growth and engagement through strategic digital marketing campaigns and analytics.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Navigation</h3>
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
+            <div class="navbar-center">
+                <div class="nav-links">
+                    <a href="#hero" class="active">Home</a>
                     <a href="services.html">Services</a>
                     <a href="blog.html">Blog</a>
+                    <a href="#what">What</a>
                     <a href="labs.html">Labs</a>
-                    <a href="contact.html">Contact</a>
                     <a href="about.html">About</a>
-                    <a href="#">Style Guide</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a
+                    class="btn-outline btn-small cta-btn"
+                    href="contact.html#form"
+                    >Free website</a
+                >
+                <div class="login-icon">
+                    <img
+                        src="img/icons/login.svg"
+                        alt="User Login"
+                        class="user-icon"
+                        loading="lazy"
+                        width="24"
+                        height="24"
+                    />
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section with Video Background -->
+        <section class="hero" id="hero">
+            <div class="hero-logo-container">
+                <div class="hero-logo">
+                    <img
+                        src="img/logo/mc-logo.svg"
+                        alt="MC Logo"
+                        class="mc-logo-hero"
+                        tabindex="0"
+                        loading="lazy"
+                        width="1024"
+                        height="768"
+                    />
+                </div>
+                <div class="hidden-heading">
+                    <div class="designer-info">
+                        <h1 class="designer-name">Marceli Cieplik</h1>
+                        <h2 class="designer-title">UI/UX designer</h2>
+                    </div>
                 </div>
             </div>
 
-            <div class="footer-section">
-                <h3>About Marceli</h3>
-                <p class="footer-description">
-                    Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
-                    With expertise in creating intuitive interfaces and engaging user journeys,
-                    we transform ideas into exceptional digital solutions.
+            <div class="video-container">
+                <!-- Cover Image (shown initially) -->
+                <img
+                    src="img/black-rider.png"
+                    alt="Black Rider cover"
+                    class="cover-image"
+                    loading="lazy"
+                    width="1862"
+                    height="1060"
+                />
+
+                <!-- Gradient overlay above cover image -->
+                <div class="hero-gradient-overlay"></div>
+
+                <!-- Video Background (revealed on hover) - lazy loaded -->
+                <video
+                    class="video-bg lazy-loading"
+                    data-src="vid/rider/black-rider.mp4"
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                >
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Services Cards Section -->
+        <section class="services-section" id="services">
+            <div class="services-container">
+                <h2 class="services-title">
+                    12+ years blending design, tech, and strategic insight to
+                    create smarter, human-centered digital products.
+                </h2>
+                <p class="services-subtitle">
+                    I tackle challenges holistically—from code to research—to
+                    deliver simple, practical, and satisfying software &
+                    solutions.
                 </p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <div class="social-links">
-                    <a href="#" aria-label="Instagram">ig</a>
-                    <a href="#" aria-label="X.com">𝕏</a>
-                    <a href="#" aria-label="YouTube">yt</a>
-                    <a href="#" aria-label="Substack">sub</a>
+                <div class="services-cards">
+                    <div class="service-card">
+                        <div class="card-content">
+                            <h3>WEB SITES</h3>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-content">
+                            <h3>MOBILE APPS</h3>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-content">
+                            <h3>AI/LLM TOOLS</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
-        </div>
-    </footer>
+        </section>
 
-    <script defer src="script.js"></script>
-</body>
+        <!-- Partner Logos Section -->
+        <section class="logos-section">
+            <div class="logos-container">
+                <div class="logos-grid">
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/superbet-light.svg"
+                            alt="Superbet"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/tui-travel.svg"
+                            alt="TUI Travel"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/barclays.svg"
+                            alt="Barclays"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/pokerstars.svg"
+                            alt="PokerStars"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/mmb-mini.svg"
+                            alt="MMB"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="80"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/pearson-wh.svg"
+                            alt="Pearson"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/costa_coffee-red.png"
+                            alt="Costa Coffee"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="100"
+                            height="40"
+                        />
+                    </div>
+                    <div class="logo-item">
+                        <img
+                            src="img/logo/santander.svg"
+                            alt="Santander"
+                            class="partner-logo"
+                            tabindex="0"
+                            loading="lazy"
+                            width="120"
+                            height="40"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Section -->
+        <section class="what-section" id="what">
+            <div class="zigzag-container">
+                <div class="zigzag-item">
+                    <div class="zigzag-image">
+                        <img
+                            src="img/bolid.jpeg"
+                            alt="What we create"
+                            loading="lazy"
+                            width="1920"
+                            height="1080"
+                        />
+                        <video
+                            class="zigzag-video lazy-loading"
+                            data-src="vid/formula/bolid.mp4"
+                            muted
+                            loop
+                            playsinline
+                            preload="none"
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="zigzag-text">
+                        <h3>What We Create</h3>
+                        <p>
+                            We build stunning digital experiences that captivate
+                            and engage users across all platforms and devices.
+                        </p>
+                    </div>
+                </div>
+                <div class="zigzag-item zigzag-reverse">
+                    <div class="zigzag-text">
+                        <h3>What We Deliver</h3>
+                        <p>
+                            Our solutions are crafted with precision, ensuring
+                            scalability, performance, and exceptional user
+                            experiences.
+                        </p>
+                    </div>
+                    <div class="zigzag-image">
+                        <img
+                            src="img/black-rider.png"
+                            alt="What we deliver"
+                            loading="lazy"
+                            width="1862"
+                            height="1060"
+                        />
+                    </div>
+                </div>
+                <div class="zigzag-item">
+                    <div class="zigzag-image">
+                        <img
+                            src="img/black-rider.png"
+                            alt="What we achieve"
+                            loading="lazy"
+                            width="1862"
+                            height="1060"
+                        />
+                    </div>
+                    <div class="zigzag-text">
+                        <h3>What We Achieve</h3>
+                        <p>
+                            We transform ideas into reality, helping businesses
+                            grow and succeed in the digital landscape.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content">
+            <h2 class="section-title">Our Services</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Web Design</h3>
+                    <p>
+                        Creating beautiful, responsive websites that provide
+                        exceptional user experiences across all devices.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>Development</h3>
+                    <p>
+                        Building robust, scalable applications using the latest
+                        technologies and best practices.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>Digital Marketing</h3>
+                    <p>
+                        Driving growth and engagement through strategic digital
+                        marketing campaigns and analytics.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="labs.html">Labs</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="about.html">About</a>
+                        <a href="#">Style Guide</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About Marceli</h3>
+                    <p class="footer-description">
+                        Marceli Cieplik is a UI/UX Designer specializing in
+                        modern web experiences. With expertise in creating
+                        intuitive interfaces and engaging user journeys, we
+                        transform ideas into exceptional digital solutions.
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">
+                            <img src="img/logo/insta.svg" alt="Instagram" />
+                        </a>
+                        <a href="#" aria-label="X.com">
+                            <img src="img/icons/user.svg" alt="X" />
+                        </a>
+                        <a href="#" aria-label="YouTube">yt</a>
+                        <a href="#" aria-label="Substack">sub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
+            </div>
+        </footer>
+
+        <script defer src="script.js"></script>
+    </body>
 </html>
