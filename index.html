@@ -40,30 +40,30 @@
         <!-- Top Navigation Bar -->
         <nav class="navbar" id="navbar">
             <div class="navbar-left">
-                <img
-                    src="img/logo/mc-logo.svg"
-                    alt="MC Logo"
-                    class="navbar-logo"
-                    loading="lazy"
-                    width="1024"
-                    height="768"
-                />
+                <a href="index.html" aria-label="Home">
+                    <img
+                        src="img/logo/mc-logo.svg"
+                        alt="MC Logo"
+                        class="navbar-logo"
+                        loading="lazy"
+                        width="1024"
+                        height="768"
+                    />
+                </a>
             </div>
             <div class="navbar-center">
                 <div class="nav-links">
-                    <a href="#hero" class="active">Home</a>
+                    <a href="index.html" class="active">Home</a>
                     <a href="services.html">Services</a>
                     <a href="blog.html">Blog</a>
-                    <a href="#what">What</a>
+                    <a href="#solutions">Solutions</a>
                     <a href="labs.html">Labs</a>
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
             <div class="navbar-right">
-                <a
-                    class="btn-outline btn-small cta-btn"
-                    href="contact.html#form"
+                <a class="btn-free-website cta-btn" href="contact.html#form"
                     >Free website</a
                 >
                 <div class="login-icon">
@@ -257,8 +257,8 @@
             </div>
         </section>
 
-        <!-- What Section -->
-        <section class="what-section" id="what">
+        <!-- Solutions Section -->
+        <section class="what-section" id="solutions">
             <div class="zigzag-container">
                 <div class="zigzag-item">
                     <div class="zigzag-image">
@@ -359,31 +359,40 @@
         <!-- Footer -->
         <footer>
             <div class="footer-content">
+                <!-- Column 1: Navigation -->
                 <div class="footer-section">
                     <h3>Navigation</h3>
                     <div class="footer-links">
                         <a href="index.html">Home</a>
                         <a href="services.html">Services</a>
                         <a href="blog.html">Blog</a>
+                        <a href="#solutions">Solutions</a>
                         <a href="labs.html">Labs</a>
-                        <a href="contact.html">Contact</a>
                         <a href="about.html">About</a>
-                        <a href="#">Style Guide</a>
+                        <a href="contact.html">Contact</a>
                     </div>
                 </div>
 
+                <!-- Column 2: Services -->
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <div class="footer-links">
+                        <a href="services.html#uiux">UI/UX Design</a>
+                        <a href="services.html#web">Web Design</a>
+                        <a href="services.html#mobile">Mobile Design</a>
+                        <a href="services.html#branding">Branding</a>
+                        <a href="services.html#consulting">Consulting</a>
+                    </div>
+                </div>
+
+                <!-- Column 3: About -->
                 <div class="footer-section">
                     <h3>About Marceli</h3>
                     <p class="footer-description">
-                        Marceli Cieplik is a UI/UX Designer specializing in
-                        modern web experiences. With expertise in creating
-                        intuitive interfaces and engaging user journeys, we
-                        transform ideas into exceptional digital solutions.
+                        UI/UX Designer specializing in modern web experiences.
+                        Creating intuitive interfaces and engaging user journeys
+                        that transform ideas into exceptional digital solutions.
                     </p>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Connect</h3>
                     <div class="social-links">
                         <a href="#" aria-label="Instagram">
                             <img src="img/logo/insta.svg" alt="Instagram" />
@@ -395,10 +404,26 @@
                         <a href="#" aria-label="Substack">sub</a>
                     </div>
                 </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <div class="footer-links">
+                        <a href="contact.html">Contact Form</a>
+                        <a href="contact.html#whatsapp">WhatsApp</a>
+                        <a href="contact.html#telegram">Telegram</a>
+                        <a href="contact.html#email">Email</a>
+                    </div>
+                </div>
             </div>
 
             <div class="footer-bottom">
-                <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
+                <p class="footer-version">v. 3.0 | © 2025 Marceli Cieplik</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookies</a>
+                </div>
             </div>
         </footer>
 

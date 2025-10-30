@@ -44,7 +44,7 @@
 
 | Color | Hex | RGB | Usage |
 |-------|-----|-----|-------|
-| **Background Dark** | `#020305` | `rgb(2, 3, 5)` | Main background |
+| **Background Dark** | `#000305` | `rgb(0, 3, 5)` | Main background (updated darker) |
 | **Text Primary** | `#E5E5E5` | `rgb(229, 229, 229)` | Body text, headings |
 | **Text Muted** | `#8B8B8B` | `rgb(139, 139, 139)` | Secondary text, captions |
 | **Text Gray** | `#B0B0B0` | `rgb(176, 176, 176)` | Tertiary text, placeholders |
@@ -74,7 +74,7 @@ linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 
 
 ```css
 :root {
-    --bg-color: #020305;
+    --bg-color: #000305;
     --text-color: #E5E5E5;
     --accent-color: #B7F04D;
     --accent-dark: #4A8B5C;
@@ -139,6 +139,38 @@ h1, h2, h3, h4, h5, h6 {
 }
 ```
 
+#### Emergent Silver Gradient Effect (H1, H2, H3)
+
+Headings H1, H2, and H3 feature a special "Emergent Silver" gradient effect that creates a sense of depth, making text appear to emerge from the dark background.
+
+```css
+h1, h2, h3 {
+    /* Silver Gradient: predominantly light white, fading gently dark on the right */
+    background: linear-gradient(
+        270deg,
+        #1a2a3a 0%,      /* Darker tone on the far right */
+        #f4f4f4 25%,     /* Gently transitions to light white */
+        #f4f4f4 100%     /* Stays light white for most of text */
+    );
+    
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Darker, more gentle shadow for depth */
+    filter: drop-shadow(0 0 8px rgba(244, 244, 244, 0.08))
+            drop-shadow(3px 3px 15px rgba(0, 0, 0, 0.7));
+    
+    position: relative;
+}
+```
+
+**Key Features:**
+- **Gradient Direction**: Right-to-left (270deg) - flipped from original
+- **Color Transition**: Dark (#1a2a3a) → Light (#f4f4f4) at 25% (more gentle)
+- **Shadow Layers**: Dual drop-shadow with darker, softer effect
+- **Effect**: Text appears to emerge from background with faded gradient on the right side
+
 | Element | Size | Weight | Usage |
 |---------|------|--------|-------|
 | `h1` | 3rem (mobile: 2.5rem) | 500 | Page titles |
@@ -202,6 +234,8 @@ margin: 0 auto; /* Center alignment */
 - Font weight: `600`
 - Transition: `all 0.3s ease`
 - Shadow: `0 4px 20px rgba(0, 0, 0, 0.12)`
+- Line height: `1` (precise vertical centering)
+- White space: `nowrap` (prevents wrapping)
 
 #### Button Variants
 
@@ -263,29 +297,36 @@ margin: 0 auto; /* Center alignment */
 
 #### Button Sizes
 
+Buttons are designed with flexible, responsive sizing that scales appropriately across devices.
+
 ##### Small
 ```html
 <button class="btn btn-small">Small</button>
 ```
-- Padding: `0.5rem 1rem`
-- Font size: `0.8rem`
-- Min height: `36px`
+- **Desktop**: Padding `10px 20px`, Font size `0.875rem`, Min height `40px`
+- **Tablet**: Padding `9px 18px`, Font size `0.85rem`, Min height `38px`
+- **Mobile**: Padding `8px 16px`, Font size `0.8rem`, Min height `36px`
 
 ##### Normal (Default)
 ```html
-<button class="btn">Normal</button>
+<button class="btn btn-medium">Normal</button>
 ```
-- Padding: `0.7rem 1.5rem`
-- Font size: `0.9rem`
-- Min height: `44px`
+- **Desktop**: Padding `12px 24px`, Font size `0.9rem`, Min height `44px`
+- **Tablet**: Padding `11px 22px`, Font size `0.875rem`, Min height `42px`
+- **Mobile**: Padding `10px 20px`, Font size `0.85rem`, Min height `40px`
 
 ##### Large
 ```html
 <button class="btn btn-large">Large</button>
 ```
-- Padding: `1rem 2rem`
-- Font size: `1.1rem`
-- Min height: `52px`
+- **Desktop**: Padding `14px 28px`, Font size `1rem`, Min height `48px`
+- **Tablet**: Padding `13px 26px`, Font size `0.95rem`, Min height `46px`
+- **Mobile**: Padding `12px 24px`, Font size `0.9rem`, Min height `44px`
+
+**Responsive Breakpoints:**
+- Desktop: `> 1024px`
+- Tablet: `768px - 1024px`
+- Mobile: `< 768px`
 
 #### Button States
 
@@ -307,6 +348,45 @@ opacity: 0.5;
 cursor: not-allowed;
 pointer-events: none;
 ```
+
+#### Icon Button (Login/User)
+
+A special rounded/pill-shaped button designed for icon-only interactions.
+
+```html
+<div class="login-icon">
+    <img src="img/icons/login.svg" alt="User Login" class="user-icon">
+</div>
+```
+
+**Properties:**
+- **Desktop**: Size `44×44px`, Padding `12px`, Border radius `50px`
+- **Tablet**: Size `42×42px`, Padding `11px`, Border radius `50px`
+- **Mobile**: Size `40×40px`, Padding `10px`, Border radius `50px`
+- Border: `2px solid rgba(229, 229, 229, 0.12)`
+- Background: `rgba(229, 229, 229, 0.1)`
+- Display: `inline-flex` with centered content
+- Transition: `all 0.3s ease`
+
+**Icon Specifications:**
+- Always square (aspect-ratio: 1/1)
+- Desktop: `20×20px`
+- Tablet: `19×19px`
+- Mobile: `18×18px`
+- Filter: `brightness(0) invert(1)`
+- Flex-shrink: `0` (maintains size)
+
+**Hover State:**
+```css
+background-color: rgba(229, 229, 229, 0.2);
+border-color: rgba(74, 139, 92, 0.4);
+box-shadow: 0 0 10px rgba(74, 139, 92, 0.2);
+```
+
+**Use Cases:**
+- User login/profile access
+- Icon-only actions
+- Circular avatar buttons
 
 ---
 
@@ -373,6 +453,550 @@ pointer-events: none;
 **Mobile (<768px):**
 - Single column stack
 - Consider hamburger menu for space efficiency
+
+---
+
+### Navigation
+
+#### Top Navbar
+
+The fixed navigation bar features a three-column grid layout with logo, navigation links, and action buttons.
+
+**Structure:**
+```css
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 1.5rem 5%;
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 3, 5, 0.15);
+}
+```
+
+**Navigation Links:**
+- Order: Home | Services | Blog | Solutions | Labs | About | Contact
+- Home link: Always links to `index.html` (never uses hash `#hero`)
+- Solutions: Links to `index.html#solutions` (formerly "What")
+- Default color: `rgba(255, 255, 255, 0.35)`
+- Hover color: `rgba(255, 255, 255, 0.7)`
+- Active color: `#ffffff` with underline
+- **Enhanced Click Area**: Padding `12px 8px` (8px wider than label, taller for better touch)
+- Display: `inline-block` with `position: relative`
+- Transition: `color 0.3s ease, transform 0.3s ease`
+- **No Hash URLs**: JavaScript prevents adding hash to URL history
+
+**Active Link Indicator:**
+```css
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+}
+```
+
+**Logo Behavior:**
+- Logo is wrapped in link to `index.html`
+- Clicking logo on index.html scrolls to top (no hash)
+- Clicking logo on other pages navigates to home
+
+**Right Section:**
+- Gap: `0.75rem` between elements
+- Padding-right: `2rem` (desktop)
+- Contains: "Free website" button (outline style) + Login icon button
+- Alignment: Vertically centered with `align-items: center`
+- Button uses `.btn-free-website` class with outline styling
+
+**Special Behaviors:**
+- **Home Link**: Clicking "Home" always scrolls to top without adding hash to URL
+- **Browser Back**: Preserves scroll position when using back button
+- **No Hash URLs**: All navigation uses `history.pushState()` to avoid hash URLs
+
+**Responsive Behavior:**
+- **Mobile (< 768px)**: Single column, centered elements, reduced gaps
+- **Tablet (768-1024px)**: Slightly reduced spacing and button sizes
+- **Desktop (> 1024px)**: Full layout with optimal spacing
+
+### Footer
+
+#### Modern Four-Column Layout
+
+The footer features a modern, responsive four-column layout that adapts to different screen sizes.
+
+**Structure:**
+```html
+<footer>
+    <div class="footer-content">
+        <div class="footer-section"><!-- Column 1: Navigation --></div>
+        <div class="footer-section"><!-- Column 2: Services --></div>
+        <div class="footer-section"><!-- Column 3: About & Social --></div>
+        <div class="footer-section"><!-- Column 4: Contact --></div>
+    </div>
+    <div class="footer-bottom">
+        <p class="footer-version">v. 3.0 | © 2025 Marceli Cieplik</p>
+        <div class="footer-legal"><!-- Privacy, Terms, Cookies --></div>
+    </div>
+</footer>
+```
+
+**Styling:**
+- Background: `rgba(0, 3, 5, 0.95)` with blur(20px)
+- Padding: `5rem 5% 2rem`
+- Border-top: Gradient line effect for visual polish
+- Grid: `repeat(4, 1fr)` with `3rem` gap
+
+**Column Headers:**
+- Font-size: `1.1rem`
+- Font-weight: `600`
+- Green underline accent (40px width)
+- Bottom padding: `0.75rem`
+
+**Footer Links:**
+- Animated hover effect with arrow (→) appearing on left
+- Color transition from `rgba(246, 246, 246, 0.65)` to green
+- Slide effect: `translateX(5px)` on hover
+- Smooth transitions: `0.3s ease`
+
+**Social Links:**
+- Circular icons with hover effects
+- Display: `flex` with gap
+- Opacity and transform transitions
+
+**Footer Bottom:**
+- Flexbox layout: space-between alignment
+- Version info on left, legal links on right
+- Responsive: Stacks vertically on mobile
+
+**Responsive Breakpoints:**
+```css
+Desktop (> 1024px): 4 columns
+Tablet (768-1024px): 2 columns (2×2 grid)
+Mobile (< 768px): 1 column (stacked)
+```
+
+**Key Features:**
+- Gradient top border for elegance
+- Animated link hover effects
+- Reduced visual clutter
+- Consistent spacing and alignment
+- Fully responsive layout
+- Improved readability with proper hierarchy
+
+---
+
+## Micro-interactions & Hover Effects
+
+The portfolio features carefully crafted micro-interactions and hover effects that enhance user engagement and provide visual feedback.
+
+### Navigation Effects
+
+#### Logo Hover
+```css
+.navbar-logo {
+    opacity: 0.65;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-logo:hover,
+.navbar-logo:focus {
+    opacity: 1;
+    transform: scale(1.05);
+}
+```
+
+**Effect**: Logo brightens and slightly enlarges on hover
+**Duration**: 0.3s ease
+**Transform**: scale(1.05)
+
+#### Navigation Link Hover
+```css
+.nav-links a {
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+}
+```
+
+**Effect**: Link brightens and scales up
+**Color Change**: 35% → 70% opacity
+**Scale**: 1.05
+**Duration**: 0.3s ease
+
+#### Active Link Indicator
+```css
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+}
+```
+
+**Effect**: Green underline appears below active link
+**Color**: Accent green (#0bb43d)
+**Height**: 2px
+**Position**: 8px below text
+
+### Button Interactions
+
+#### Standard Button Hover
+```css
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+```
+
+**Effect**: Button lifts up with enhanced shadow
+**Lift**: 2px upward
+**Shadow**: Expands from 4px to 8px blur
+**Duration**: 0.3s ease
+
+#### Outline Button Hover
+```css
+.btn-outline:hover {
+    background-color: var(--glass-bg);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(11, 180, 61, 0.2);
+}
+```
+
+**Effect**: Border and text turn green, button lifts, green glow appears
+**Color Change**: White → Green
+**Background**: Transparent → Glass effect
+**Shadow**: Green glow (20% opacity)
+**Lift**: 2px upward
+
+#### Free Website Button Hover
+```css
+.btn-free-website:hover {
+    background-color: var(--glass-bg);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(11, 180, 61, 0.2);
+}
+```
+
+**Effect**: Outline style with green accent and lift
+**Duration**: 0.3s ease
+**All Properties**: Smooth transition
+
+#### Login Icon Hover
+```css
+.login-icon {
+    transition: all 0.3s ease;
+}
+
+.login-icon:hover,
+.login-icon:focus {
+    background-color: rgba(229, 229, 229, 0.2);
+    border-color: rgba(74, 139, 92, 0.4);
+    box-shadow: 0 0 10px rgba(74, 139, 92, 0.2);
+}
+```
+
+**Effect**: Background brightens, green tint on border, green glow
+**Background**: 10% → 20% opacity
+**Border**: Green tint added
+**Glow**: 10px green shadow
+
+### Footer Interactions
+
+#### Footer Link Arrow Animation
+```css
+.footer-links a {
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links a::before {
+    content: "→";
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #0bb43d;
+    padding-left: 20px;
+    transform: translateX(5px);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+    left: 0;
+}
+```
+
+**Effect**: Arrow (→) appears from left as link slides right and turns green
+**Animation Stages**:
+1. Arrow positioned -20px left (hidden)
+2. On hover: Arrow slides to 0px (visible)
+3. Link text slides 20px right
+4. Additional 5px translateX for emphasis
+5. Color changes to green
+
+**Duration**: 0.3s ease for all transitions
+**Color**: rgba(246, 246, 246, 0.65) → #0bb43d
+
+**Visual Flow**:
+```
+Before hover:
+Link Text
+
+During hover:
+→ Link Text (sliding right, turning green)
+
+After hover:
+Link Text (back to original position)
+```
+
+This is one of the most sophisticated interactions on the site!
+
+#### Social Link Hover
+```css
+.social-links a {
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: rgba(11, 180, 61, 0.1);
+    border-color: #0bb43d;
+    color: #0bb43d;
+    transform: translateY(-2px);
+}
+```
+
+**Effect**: Icon lifts up with green background and border
+**Lift**: 2px upward
+**Background**: Green tint (10% opacity)
+**Border**: Green accent color
+**Duration**: 0.3s ease
+
+### Hero Section Effects
+
+#### Logo Fade Transition
+```css
+.mc-logo-hero {
+    transition: filter 0.8s ease, opacity 1.2s ease 0.8s, transform 1.2s ease 0.8s;
+}
+
+.hero-logo-container:hover .mc-logo-hero {
+    filter: brightness(0) invert(1);
+    opacity: 0;
+    transform: scale(0.8);
+}
+```
+
+**Effect**: Logo inverts color, fades out, and shrinks
+**Duration**: 0.8s for color, 1.2s for fade/scale
+**Delay**: 0.8s for fade and scale
+**Transform**: scale(0.8)
+
+#### Designer Info Reveal
+```css
+.hidden-heading {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 0s linear 1s;
+}
+
+.hero-logo-container:hover .hidden-heading {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease, visibility 0s;
+}
+```
+
+**Effect**: Designer name and title fade in as logo fades out
+**Duration**: 1s opacity transition
+**Visibility**: Instant change on hover start
+
+#### Video Background Transition
+```css
+.video-bg {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Triggered by hover */
+videoBg.style.opacity = '1';
+```
+
+**Effect**: Video smoothly fades in behind cover image
+**Duration**: 1s ease
+**Coordination**: Works with logo hover effect
+
+### Card Interactions
+
+#### Standard Card Hover
+```css
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+```
+
+**Effect**: Card lifts with enhanced shadow
+**Lift**: 5px upward
+**Shadow**: Deepens and expands
+**Duration**: 0.3s ease
+
+#### Service Card Hover
+```css
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--glass-shadow);
+    border-color: var(--accent-color);
+}
+```
+
+**Effect**: Lift + shadow + green border accent
+**Lift**: 5px upward
+**Border**: Green accent appears
+
+#### Blog Card Image Hover
+```css
+.blog-card-image-link img {
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image-link img {
+    transform: scale(1.05);
+}
+```
+
+**Effect**: Image zooms in slightly when card is hovered
+**Scale**: 1.05 (5% larger)
+**Duration**: 0.3s ease
+**Container**: Overflow hidden to crop zoom
+
+### Labs Page - Gradient Cards
+
+#### Project Card Hover
+```css
+.project-card {
+    transition: all 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+```
+
+**Effect**: Card lifts more dramatically and scales up
+**Lift**: 8px upward (more than standard cards)
+**Scale**: 1.02 (2% larger)
+**Duration**: 0.4s ease (slightly slower for elegance)
+
+### Timing Guidelines
+
+**Interaction Speeds**:
+- **Quick**: 0.3s - Standard interactions (buttons, links, icons)
+- **Medium**: 0.4s - Cards and larger elements
+- **Slow**: 0.8s-1.2s - Hero section transitions, complex animations
+
+**Easing Functions**:
+- `ease` - Default for most interactions (smooth acceleration/deceleration)
+- `ease-out` - Animations ending smoothly (fade-ins)
+- `ease-in` - Animations starting smoothly (fade-outs)
+- `linear` - Constant speed (visibility changes)
+
+### Transform Properties Used
+
+```css
+/* Lift effects */
+transform: translateY(-2px);  /* Buttons */
+transform: translateY(-5px);  /* Cards */
+transform: translateY(-8px);  /* Special cards */
+
+/* Scale effects */
+transform: scale(1.05);       /* Small zoom */
+transform: scale(1.02);       /* Subtle zoom */
+transform: scale(0.8);        /* Shrink */
+
+/* Combined */
+transform: translateY(-8px) scale(1.02);  /* Lift + zoom */
+transform: translateX(5px);   /* Slide right */
+```
+
+### Color Transitions
+
+**Navigation**:
+- Inactive: `rgba(255, 255, 255, 0.35)`
+- Hover: `rgba(255, 255, 255, 0.7)`
+- Active: `#ffffff`
+
+**Footer Links**:
+- Default: `rgba(246, 246, 246, 0.65)`
+- Hover: `#0bb43d` (green)
+
+**Buttons**:
+- Outline hover: Green border + text
+- Solid hover: Darker shade
+
+### Shadow Effects
+
+**Button Shadow Progression**:
+```css
+/* Default */
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+
+/* Hover */
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+```
+
+**Card Shadow Progression**:
+```css
+/* Default */
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+/* Hover */
+box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+```
+
+### Best Practices
+
+1. **Consistency**: All similar elements use same timing (0.3s for buttons)
+2. **Feedback**: Every interactive element has visible hover state
+3. **Performance**: Use `transform` and `opacity` (GPU-accelerated)
+4. **Subtlety**: Effects enhance, don't distract
+5. **Accessibility**: Focus states match hover states
+6. **Smooth**: Ease timing creates natural feel
+
+### Avoiding Layout Shift
+
+All hover effects use `transform` instead of changing position properties:
+```css
+/* Good - No layout shift */
+transform: translateY(-2px);
+
+/* Bad - Causes layout shift */
+top: -2px;
+```
 
 ---
 

@@ -17,7 +17,7 @@
         }
 
         :root {
-            --bg-color: #020305;
+            --bg-color: #000305;
             --text-color: #E5E5E5;
             --muted-color: #8B8B8B;
             --accent-color: #4A8B5C;
@@ -28,15 +28,15 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-color);
+            background: #0a0e1a;
             color: var(--text-color);
             min-height: 100vh;
         }
 
         .labs-section {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 6rem 1rem;
+            padding: 6rem 2rem;
         }
 
         .labs-header {
@@ -58,170 +58,150 @@
             margin: 0 auto;
         }
 
-        .experiment-container {
+        .projects-grid {
             display: grid;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 2rem;
             margin-bottom: 4rem;
         }
 
-        .experiment-hero {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
+        /* Blurred Gradient Card Design */
+        .project-card {
+            position: relative;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s ease;
-        }
-
-        .experiment-hero:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .experiment-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 500px;
-        }
-
-        .experiment-text {
-            padding: 3rem;
+            min-height: 360px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 1.5rem;
+            justify-content: space-between;
+            padding: 3rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
 
-        .experiment-screenshot {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 500px;
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(60px);
+            -webkit-backdrop-filter: blur(60px);
+            z-index: -1;
         }
 
-        .screenshot-placeholder {
-            width: 90%;
-            height: 80%;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            font-weight: 500;
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
         }
 
-        .experiment-title {
+        /* Gradient backgrounds for cards */
+        .gradient-teal-purple {
+            background: linear-gradient(135deg,
+                rgba(45, 106, 109, 0.8) 0%,
+                rgba(88, 59, 114, 0.8) 100%);
+        }
+
+        .gradient-pink-orange {
+            background: linear-gradient(135deg,
+                rgba(214, 93, 177, 0.8) 0%,
+                rgba(255, 132, 102, 0.8) 100%);
+        }
+
+        .gradient-blue-cyan {
+            background: linear-gradient(135deg,
+                rgba(79, 172, 254, 0.8) 0%,
+                rgba(0, 242, 254, 0.8) 100%);
+        }
+
+        .gradient-green-teal {
+            background: linear-gradient(135deg,
+                rgba(67, 233, 123, 0.8) 0%,
+                rgba(56, 249, 215, 0.8) 100%);
+        }
+
+        .gradient-red-pink {
+            background: linear-gradient(135deg,
+                rgba(250, 112, 154, 0.8) 0%,
+                rgba(254, 225, 64, 0.8) 100%);
+        }
+
+        .project-card-header {
+            z-index: 1;
+        }
+
+        .project-title {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
-        .experiment-subtitle {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .experiment-description {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--muted-color);
-            margin-bottom: 2rem;
-        }
-
-        .experiment-features {
-            display: grid;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: var(--text-color);
-            font-size: 0.95rem;
-        }
-
-        .feature-icon {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        .experiment-link {
-            align-self: flex-start;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #2d5a3d 100%);
-            color: #fff;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
+        .project-description {
             font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0;
+        }
+
+        .project-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .project-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 25px rgba(74, 139, 92, 0.3);
         }
 
-        .experiment-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(74, 139, 92, 0.4);
-            background: linear-gradient(135deg, #2d5a3d 0%, var(--accent-color) 100%);
+        .project-link:hover {
+            transform: translateX(5px);
         }
 
-        /* Different gradients for each experiment */
-        .blur-gradient .experiment-screenshot {
-            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
-        }
-
-        .crypto-predictor .experiment-screenshot {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .chrome-plugin .experiment-screenshot {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .school-finder .experiment-screenshot {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .poland-jobs .experiment-screenshot {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        /* Coming Soon Badge */
+        .coming-soon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            z-index: 2;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .experiment-content {
+            .projects-grid {
                 grid-template-columns: 1fr;
-                min-height: auto;
             }
 
-            .experiment-text {
+            .project-card {
+                min-height: 320px;
                 padding: 2rem;
             }
 
-            .experiment-screenshot {
-                min-height: 300px;
-            }
-
-            .experiment-title {
+            .project-title {
                 font-size: 2rem;
             }
 
-            .experiment-description {
-                font-size: 1rem;
+            .project-description {
+                font-size: 0.95rem;
+            }
+
+            .coming-soon {
+                top: 1.5rem;
+                right: 1.5rem;
             }
         }
 
@@ -230,17 +210,17 @@
                 padding: 4rem 1rem;
             }
 
-            .experiment-text {
+            .project-card {
                 padding: 1.5rem;
+                min-height: 280px;
             }
 
-            .experiment-title {
+            .project-title {
                 font-size: 1.8rem;
             }
 
-            .experiment-link {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
+            .project-link {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -254,13 +234,13 @@
         </div>
         <div class="navbar-center">
             <div class="nav-links">
-                <a href="index.html#hero">Home</a>
+                <a href="index.html">Home</a>
                 <a href="services.html">Services</a>
                 <a href="blog.html">Blog</a>
-                <a href="index.html#what">What</a>
+                <a href="index.html#solutions">Solutions</a>
                 <a href="labs.html" class="active">Labs</a>
-                <a href="contact.html">Contact</a>
                 <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
         <div class="navbar-right">
@@ -278,48 +258,61 @@
                 <p>Experimental projects and applications showcasing innovative solutions and cutting-edge technology</p>
             </div>
 
-            <div class="experiment-container">
-                <!-- Blurred Gradient Generator -->
-                <div class="experiment-hero blur-gradient">
-                    <div class="experiment-content">
-                        <div class="experiment-text">
-                            <div class="experiment-subtitle">Visual Tool</div>
-                            <h2 class="experiment-title">Blurred Gradient Generator</h2>
-                            <p class="experiment-description">
-                                A powerful web application for creating stunning blurred gradient effects with real-time preview. 
-                                Perfect for designers and developers looking to add beautiful, modern visual effects to their projects.
-                            </p>
-                            <div class="experiment-features">
-                                <div class="feature-item">
-                                    <span class="feature-icon">✨</span>
-                                    <span>Real-time gradient creation and preview</span>
-                                </div>
-                                <div class="feature-item">
-                                    <span class="feature-icon">🎨</span>
-                                    <span>Customizable blur intensity and colors</span>
-                                </div>
-                                <div class="feature-item">
-                                    <span class="feature-icon">📋</span>
-                                    <span>One-click CSS code generation</span>
-                                </div>
-                                <div class="feature-item">
-                                    <span class="feature-icon">💾</span>
-                                    <span>Export gradients as images or code</span>
-                                </div>
-                            </div>
-                            <a href="https://marlink.github.io/blur-gradient-fx/" class="experiment-link" target="_blank" rel="noopener">
-                                Try the Generator →
-                            </a>
-                        </div>
-                        <div class="experiment-screenshot">
-                            <div class="screenshot-placeholder">
-                                Blurred Gradient Generator<br>
-                                Screenshot Preview
-                            </div>
-                        </div>
+            <div class="projects-grid">
+                <!-- Blurred Gradient Card -->
+                <article class="project-card gradient-teal-purple">
+                    <div class="project-card-header">
+                        <h2 class="project-title">Blurred gradient card</h2>
+                        <p class="project-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
+                        </p>
                     </div>
-                </div>
+                    <div class="project-card-footer">
+                        <a href="#" class="project-link">https://web-address.com</a>
+                    </div>
+                </article>
 
+                <!-- Placeholder Projects - Keep for future content -->
+                <article class="project-card gradient-pink-orange">
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="project-card-header">
+                        <h2 class="project-title">AI Content Generator</h2>
+                        <p class="project-description">
+                            Advanced AI-powered tool for generating high-quality content with natural language processing.
+                        </p>
+                    </div>
+                    <div class="project-card-footer">
+                        <a href="#" class="project-link">https://web-address.com</a>
+                    </div>
+                </article>
+
+                <article class="project-card gradient-blue-cyan">
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="project-card-header">
+                        <h2 class="project-title">Chrome Extension</h2>
+                        <p class="project-description">
+                            Productivity-focused browser extension with advanced features for modern web development.
+                        </p>
+                    </div>
+                    <div class="project-card-footer">
+                        <a href="#" class="project-link">https://web-address.com</a>
+                    </div>
+                </article>
+
+                <article class="project-card gradient-green-teal">
+                    <span class="coming-soon">Coming Soon</span>
+                    <div class="project-card-header">
+                        <h2 class="project-title">Data Visualizer</h2>
+                        <p class="project-description">
+                            Interactive data visualization tool for creating stunning charts and graphs from your datasets.
+                        </p>
+                    </div>
+                    <div class="project-card-footer">
+                        <a href="#" class="project-link">https://web-address.com</a>
+                    </div>
+                </article>
+            </div>
                 <!-- Bitcoin Trend Predictor -->
                 <div class="experiment-hero crypto-predictor">
                     <div class="experiment-content">
@@ -327,7 +320,7 @@
                             <div class="experiment-subtitle">AI Prediction Tool</div>
                             <h2 class="experiment-title">Bitcoin Trend Predictor</h2>
                             <p class="experiment-description">
-                                An advanced machine learning application that analyzes Bitcoin market data to predict future trends. 
+                                An advanced machine learning application that analyzes Bitcoin market data to predict future trends.
                                 Using sophisticated algorithms and real-time data analysis for informed trading decisions.
                             </p>
                             <div class="experiment-features">
@@ -368,7 +361,7 @@
                             <div class="experiment-subtitle">Development Tool</div>
                             <h2 class="experiment-title">Chrome Plugin Builder</h2>
                             <p class="experiment-description">
-                                A comprehensive web-based platform for building and testing Chrome extensions. 
+                                A comprehensive web-based platform for building and testing Chrome extensions.
                                 Features visual interface builder, code generation, and live testing environment for rapid plugin development.
                             </p>
                             <div class="experiment-features">
@@ -409,7 +402,7 @@
                             <div class="experiment-subtitle">Location Service</div>
                             <h2 class="experiment-title">School Finder</h2>
                             <p class="experiment-description">
-                                A comprehensive web application for finding educational institutions in Poland. 
+                                A comprehensive web application for finding educational institutions in Poland.
                                 Features advanced search filters, interactive maps, and detailed information about schools and universities.
                             </p>
                             <div class="experiment-features">
@@ -450,7 +443,7 @@
                             <div class="experiment-subtitle">Alternative Version</div>
                             <h2 class="experiment-title">School Finder Pro</h2>
                             <p class="experiment-description">
-                                Enhanced version of the school finder with additional features and improved user experience. 
+                                Enhanced version of the school finder with additional features and improved user experience.
                                 Optimized for mobile devices with faster search capabilities and detailed school profiles.
                             </p>
                             <div class="experiment-features">
@@ -491,7 +484,7 @@
                             <div class="experiment-subtitle">Job Portal</div>
                             <h2 class="experiment-title">Zatrudnienie w Polsce</h2>
                             <p class="experiment-description">
-                                A comprehensive job portal designed specifically for the Polish market. 
+                                A comprehensive job portal designed specifically for the Polish market.
                                 Features advanced job matching, company profiles, and career resources for job seekers and employers.
                             </p>
                             <div class="experiment-features">
@@ -562,7 +555,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
         </div>
