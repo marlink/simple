@@ -660,9 +660,21 @@ h6 {
 
 .partner-logo:hover,
 .partner-logo:focus {
-    filter: none;
+    filter: grayscale(0%);
     opacity: 1;
     transform: scale(1.05);
+}
+
+/* Special handling for PokerStars logo - target only black colors */
+img[src*="pokerstars"] {
+    filter: brightness(0) saturate(100%) invert(100%) !important;
+    opacity: 0.7;
+}
+
+img[src*="pokerstars"]:hover,
+img[src*="pokerstars"]:focus {
+    filter: none !important;
+    opacity: 1;
 }
 
 /* What Section */
@@ -910,6 +922,150 @@ footer {
 }
 
 /* Loading spinner */
+/* Article Hero Section */
+.article-hero {
+    height: 50vh;
+    min-height: 400px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -84px;
+    padding-top: 84px;
+}
+
+.article-hero-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.article-hero .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.article-hero .video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+    will-change: opacity;
+    z-index: 1;
+}
+
+.article-hero .cover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    transition: opacity 1s ease;
+}
+
+.article-hero .hero-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 14, 27, 0.3) 0%,
+        rgba(0, 14, 27, 0.8) 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+
+.article-hero:hover .video-bg {
+    opacity: 1;
+}
+
+.article-hero:hover .cover-image {
+    opacity: 0;
+}
+
+/* Article Header */
+.article-header {
+    padding: 4rem 0 2rem;
+    background-color: var(--bg-color);
+}
+
+.article-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.article-category {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+.article-date,
+.article-read-time {
+    color: var(--muted-color);
+    font-size: 0.9rem;
+}
+
+.article-header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.article-subtitle {
+    font-size: 1.25rem;
+    color: var(--muted-color);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.article-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.article-author img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    filter: brightness(0) invert(1);
+}
+
+.author-name {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.author-title {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--muted-color);
+}
+
 #loading-spinner {
     position: fixed;
     top: 0;
@@ -1505,6 +1661,10 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 767px) {
+    .article-hero {
+        height: 40vh;
+        min-height: 300px;
+    }
     body {
         padding-top: 144px;
     }
