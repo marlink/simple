@@ -1,21 +1,37 @@
-// Consolidated DOMContentLoaded handler
+// Core DOM Content Loaded handler
 document.addEventListener('DOMContentLoaded', function() {
-    // Show loading spinner on page load
-    showLoadingSpinner();
+    initializePortfolio();
+});
 
-    // Setup lazy loading for videos and images using IntersectionObserver
+// Initialize portfolio functionality
+function initializePortfolio() {
+    setupLoadingSpinner();
     setupLazyMediaLoading();
+    setupHoverEffects();
+    setupNavbarBehavior();
+    
+    // Portfolio-specific features
+    if (document.querySelector('.skills-section')) {
+        animateSkillBars();
+        animateTimeline();
+        setupSmoothScrolling();
+        updateActiveNavigation();
+    }
+}
 
-    // Hide spinner when page is ready
-    window.addEventListener('load', hideLoadingSpinner);
-
-    // Loading spinner functions
-    function showLoadingSpinner() {
-        let spinner = document.getElementById('loading-spinner');
-        if (!spinner) {
-            spinner = document.createElement('div');
-            spinner.id = 'loading-spinner';
-            spinner.innerHTML = `
+// Loading spinner functionality
+function setupLoadingSpinner() {
+    const spinner = createSpinner();
+    showSpinner();
+    
+    window.addEventListener('load', hideSpinner);
+    
+    function createSpinner() {
+        let existingSpinner = document.getElementById('loading-spinner');
+        if (!existingSpinner) {
+            existingSpinner = document.createElement('div');
+            existingSpinner.id = 'loading-spinner';
+            existingSpinner.innerHTML = `
                 <div class="spinner-overlay">
                     <div class="spinner-container">
                         <div class="spinner"></div>
@@ -23,13 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
-            document.body.appendChild(spinner);
+            document.body.appendChild(existingSpinner);
         }
+        return existingSpinner;
+    }
+    
+    function showSpinner() {
         spinner.style.display = 'block';
     }
-
-    function hideLoadingSpinner() {
-        const spinner = document.getElementById('loading-spinner');
+    
+    function hideSpinner() {
         if (spinner) {
             spinner.style.opacity = '0';
             setTimeout(() => {
@@ -37,324 +56,389 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     }
+}
 
-    // Lazy load videos and images via IntersectionObserver
-    function setupLazyMediaLoading() {
-        if ('IntersectionObserver' in window) {
-            const onIntersect = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const src = el.getAttribute('data-src');
-                        if (src) {
-                            if (el.tagName === 'VIDEO') {
-                                el.src = src;
-                                el.load();
-                            } else if (el.tagName === 'IMG') {
-                                el.src = src;
-                            }
-                            el.removeAttribute('data-src');
-                        }
-                        observer.unobserve(el);
-                    }
-                });
-            };
-
-            const io = new IntersectionObserver(onIntersect, {
-                root: null,
-                rootMargin: '200px',
-                threshold: 0.01
-            });
-
-            document.querySelectorAll('video[data-src], img[data-src]').forEach(el => io.observe(el));
-        } else {
-            // Fallback: load immediately
-            document.querySelectorAll('video[data-src]').forEach(video => {
-                video.src = video.getAttribute('data-src');
-                video.load();
-            });
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                img.src = img.getAttribute('data-src');
-            });
-        }
+// Lazy loading setup
+function setupLazyMediaLoading() {
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for older browsers
+        document.querySelectorAll('video[data-src], img[data-src]').forEach(loadMediaElement);
+        return;
     }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                loadMediaElement(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        rootMargin: '200px',
+        threshold: 0.01
+    });
+    
+    document.querySelectorAll('video[data-src], img[data-src]').forEach(el => {
+        observer.observe(el);
+    });
+}
 
-    // Unified hover handlers with cleanup
-    function setupHoverEffect(trigger, target, showDelay = 0, hideDelay = 0) {
-        let hideTimeout;
-        const enterHandler = () => {
-            clearTimeout(hideTimeout);
-            setTimeout(() => target.style.opacity = '1', showDelay);
-        };
-        const leaveHandler = () => {
-            hideTimeout = setTimeout(() => target.style.opacity = '0', hideDelay);
-        };
-        trigger.addEventListener('mouseenter', enterHandler);
-        trigger.addEventListener('mouseleave', leaveHandler);
-
-        // Add touch support
-        trigger.addEventListener('touchstart', enterHandler);
-        trigger.addEventListener('touchend', leaveHandler);
-
-        // Return cleanup function
-        return () => {
-            trigger.removeEventListener('mouseenter', enterHandler);
-            trigger.removeEventListener('mouseleave', leaveHandler);
-            trigger.removeEventListener('touchstart', enterHandler);
-            trigger.removeEventListener('touchend', leaveHandler);
-            clearTimeout(hideTimeout);
-        };
+function loadMediaElement(element) {
+    const src = element.getAttribute('data-src');
+    if (!src) return;
+    
+    if (element.tagName === 'VIDEO') {
+        element.src = src;
+        element.load();
+    } else if (element.tagName === 'IMG') {
+        element.src = src;
     }
+    
+    element.removeAttribute('data-src');
+}
 
-    // Navbar logo hover with delay and touch
+// Hover effects setup
+function setupHoverEffects() {
+    setupNavbarLogoHover();
+    setupHeroLogoHover();
+    setupServiceCardsHover();
+    setupZigzagHover();
+}
+
+function setupNavbarLogoHover() {
     const navbarLogo = document.querySelector('.navbar-logo');
     const coverImage = document.querySelector('.cover-image');
     const videoBg = document.querySelector('.video-bg');
-    let videoHideTimeout;
-    if (navbarLogo && coverImage && videoBg) {
-        const enterHandler = () => {
-            clearTimeout(videoHideTimeout);
-            coverImage.style.opacity = '0';
-            videoBg.style.opacity = '1';
-            videoBg.play().catch(() => {});
-        };
-        const leaveHandler = () => {
-            videoHideTimeout = setTimeout(() => {
-                coverImage.style.opacity = '1';
-                videoBg.style.opacity = '0';
-                videoBg.pause();
-            }, 500);
-        };
-        navbarLogo.addEventListener('mouseenter', enterHandler);
-        navbarLogo.addEventListener('mouseleave', leaveHandler);
-        navbarLogo.addEventListener('touchstart', enterHandler);
-        navbarLogo.addEventListener('touchend', leaveHandler);
-
-        // Error handling for video
-        videoBg.addEventListener('error', () => {
-            console.error('Video playback failed');
-            videoBg.style.display = 'none';
+    
+    if (!navbarLogo || !coverImage || !videoBg) return;
+    
+    const enterHandler = () => {
+        coverImage.style.opacity = '0';
+        videoBg.style.opacity = '1';
+        videoBg.play().catch(() => {});
+    };
+    
+    const leaveHandler = () => {
+        setTimeout(() => {
             coverImage.style.opacity = '1';
-        });
-    }
+            videoBg.style.opacity = '0';
+            videoBg.pause();
+        }, 500);
+    };
+    
+    // Mouse events
+    navbarLogo.addEventListener('mouseenter', enterHandler);
+    navbarLogo.addEventListener('mouseleave', leaveHandler);
+    
+    // Touch events
+    navbarLogo.addEventListener('touchstart', enterHandler);
+    navbarLogo.addEventListener('touchend', leaveHandler);
+    
+    // Video error handling
+    videoBg.addEventListener('error', handleVideoError);
+}
 
-    // Designer info hover with cleanup
+function handleVideoError() {
+    console.error('Video playback failed');
+    const coverImage = document.querySelector('.cover-image');
+    const videoBg = document.querySelector('.video-bg');
+    
+    if (videoBg && coverImage) {
+        videoBg.style.display = 'none';
+        coverImage.style.opacity = '1';
+    }
+}
+
+function setupHeroLogoHover() {
     const heroLogoContainer = document.querySelector('.hero-logo-container');
     const designerInfo = document.querySelector('.designer-info');
-    const heroSection = document.querySelector('.hero');
-    if (heroLogoContainer && designerInfo) {
-        const cleanupHover = setupHoverEffect(heroLogoContainer, designerInfo, 200, 1000);
-        if (heroSection) {
-            let sectionHideTimeout;
-            const sectionEnter = () => clearTimeout(sectionHideTimeout);
-            const sectionLeave = () => {
-                sectionHideTimeout = setTimeout(() => {
-                    designerInfo.style.opacity = '0';
-                    designerInfo.style.visibility = 'hidden';
-                }, 1000);
-            };
-            heroSection.addEventListener('mouseenter', sectionEnter);
-            heroSection.addEventListener('mouseleave', sectionLeave);
-            heroSection.addEventListener('touchstart', sectionEnter);
-            heroSection.addEventListener('touchend', sectionLeave);
+    
+    if (!heroLogoContainer || !designerInfo) return;
+    
+    const enterHandler = () => {
+        setTimeout(() => {
+            designerInfo.style.opacity = '1';
+            designerInfo.style.visibility = 'visible';
+        }, 200);
+    };
+    
+    const leaveHandler = () => {
+        setTimeout(() => {
+            designerInfo.style.opacity = '0';
+            designerInfo.style.visibility = 'hidden';
+        }, 1000);
+    };
+    
+    heroLogoContainer.addEventListener('mouseenter', enterHandler);
+    heroLogoContainer.addEventListener('mouseleave', leaveHandler);
+    heroLogoContainer.addEventListener('touchstart', enterHandler);
+    heroLogoContainer.addEventListener('touchend', leaveHandler);
+}
 
-            // Store cleanup for potential future use
-            window.addEventListener('beforeunload', () => {
-                cleanupHover();
-                heroSection.removeEventListener('mouseenter', sectionEnter);
-                heroSection.removeEventListener('mouseleave', sectionLeave);
-                heroSection.removeEventListener('touchstart', sectionEnter);
-                heroSection.removeEventListener('touchend', sectionLeave);
-                clearTimeout(sectionHideTimeout);
-            });
-        }
-    }
-
-    // Bolid card hover/focus functionality
-    // Find the first zigzag-image that has a video (bolid card)
-    const zigzagImages = document.querySelectorAll('.zigzag-image');
-    const bolidImage = zigzagImages[0]; // First one with bolid video
-    let bolidHideTimeout;
-    if (bolidImage) {
-        const bolidCover = bolidImage.querySelector('img');
-        const bolidVideo = bolidImage.querySelector('.zigzag-video');
-
-        if (bolidCover && bolidVideo) {
-            // Function to handle hover/focus activation
-            function activateBolidVideo() {
-                clearTimeout(bolidHideTimeout);
-                bolidCover.style.opacity = '0';
-                bolidVideo.style.opacity = '1';
-                bolidVideo.play().catch(() => {});
-            }
-
-            // Function to handle hover/focus deactivation
-            function deactivateBolidVideo() {
-                bolidHideTimeout = setTimeout(() => {
-                    bolidCover.style.opacity = '1';
-                    bolidVideo.style.opacity = '0';
-                    bolidVideo.pause();
-                }, 500);
-            }
-
-            // Mouse events
-            bolidImage.addEventListener('mouseenter', activateBolidVideo);
-            bolidImage.addEventListener('mouseleave', deactivateBolidVideo);
-
-            // Touch events
-            bolidImage.addEventListener('touchstart', activateBolidVideo);
-            bolidImage.addEventListener('touchend', deactivateBolidVideo);
-
-            // Focus events for keyboard navigation
-            bolidImage.addEventListener('focus', activateBolidVideo);
-            bolidImage.addEventListener('blur', deactivateBolidVideo);
-
-            // Make bolid image focusable
-            bolidImage.tabIndex = 0;
-            bolidImage.setAttribute('role', 'button');
-            bolidImage.setAttribute('aria-label', 'Reveal bolid video');
-
-            // Error handling for bolid video
-            bolidVideo.addEventListener('error', () => {
-                console.error('Bolid video playback failed');
-                bolidVideo.style.display = 'none';
-                bolidCover.style.opacity = '1';
-            });
-        }
-    }
-
-    // Service card hover
+function setupServiceCardsHover() {
     const serviceCards = document.querySelectorAll('.service-card');
+    
     serviceCards.forEach(card => {
-        const enterHandler = () => {
+        card.addEventListener('mouseenter', () => {
             card.style.transform = 'translateY(-8px)';
             card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
             card.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-        };
-        const leaveHandler = () => {
+        });
+        
+        card.addEventListener('mouseleave', () => {
             card.style.transform = '';
             card.style.boxShadow = '';
             card.style.borderColor = '';
-        };
-        card.addEventListener('mouseenter', enterHandler);
-        card.addEventListener('mouseleave', leaveHandler);
-        card.addEventListener('touchstart', enterHandler);
-        card.addEventListener('touchend', leaveHandler);
+        });
+        
+        card.addEventListener('touchstart', () => {
+            card.style.transform = 'translateY(-8px)';
+            card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            card.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        });
+        
+        card.addEventListener('touchend', () => {
+            setTimeout(() => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+                card.style.borderColor = '';
+            }, 300);
+        });
     });
-});
+}
 
-// Navbar scroll behavior with cleanup
+function setupZigzagHover() {
+    const zigzagImages = document.querySelectorAll('.zigzag-image');
+    
+    if (zigzagImages.length === 0) return;
+    
+    // Setup for first zigzag item (bolid video)
+    const bolidImage = zigzagImages[0];
+    const bolidCover = bolidImage.querySelector('img');
+    const bolidVideo = bolidImage.querySelector('.zigzag-video');
+    
+    if (!bolidCover || !bolidVideo) return;
+    
+    const activateVideo = () => {
+        bolidCover.style.opacity = '0';
+        bolidVideo.style.opacity = '1';
+        bolidVideo.play().catch(() => {});
+    };
+    
+    const deactivateVideo = () => {
+        setTimeout(() => {
+            bolidCover.style.opacity = '1';
+            bolidVideo.style.opacity = '0';
+            bolidVideo.pause();
+        }, 500);
+    };
+    
+    bolidImage.addEventListener('mouseenter', activateVideo);
+    bolidImage.addEventListener('mouseleave', deactivateVideo);
+    bolidImage.addEventListener('touchstart', activateVideo);
+    bolidImage.addEventListener('touchend', deactivateVideo);
+    bolidImage.addEventListener('focus', activateVideo);
+    bolidImage.addEventListener('blur', deactivateVideo);
+    
+    // Make focusable
+    bolidImage.tabIndex = 0;
+    bolidImage.setAttribute('role', 'button');
+    bolidImage.setAttribute('aria-label', 'Reveal bolid video');
+    
+    bolidVideo.addEventListener('error', () => {
+        console.error('Bolid video playback failed');
+        bolidVideo.style.display = 'none';
+        bolidCover.style.opacity = '1';
+    });
+}
+
+// Navbar behavior
 let lastScrollTop = 0;
-let scrollTimeout;
+let hideTimeout;
 let interactionTimeout;
-const navbar = document.getElementById('navbar');
 
-// Check if cursor is over navbar
-function isCursorOverNavbar(event) {
-    if (!navbar) return false;
-    const rect = navbar.getBoundingClientRect();
-    return (event.clientY >= rect.top && event.clientY <= rect.bottom &&
-            event.clientX >= rect.left && event.clientX <= rect.right);
-}
-
-// Clear all navbar timeouts
-function clearNavbarTimeouts() {
-    clearTimeout(scrollTimeout);
-    clearTimeout(interactionTimeout);
-}
-
-// Handle tab visibility change
-const visibilityHandler = function(ev) {
+function setupNavbarBehavior() {
+    const navbar = document.getElementById('navbar');
     if (!navbar) return;
-    if (!document.hidden) {
+    
+    // Track interactions
+    navbar.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        clearTimeout(interactionTimeout);
         navbar.classList.remove('hidden');
-        clearNavbarTimeouts();
-    }
-};
-document.addEventListener('visibilitychange', visibilityHandler);
-
-// Track navbar interactions
-const navbarEnterHandler = function() {
-    clearNavbarTimeouts();
-    navbar.classList.remove('hidden');
-};
-const navbarLeaveHandler = function() {
-    interactionTimeout = setTimeout(function() {
-        if (!isCursorOverNavbar(event)) {
-            scrollTimeout = setTimeout(function() {
+    });
+    
+    navbar.addEventListener('mouseleave', () => {
+        interactionTimeout = setTimeout(() => {
+            hideTimeout = setTimeout(() => {
                 navbar.classList.add('hidden');
             }, 2000);
+        }, 1000);
+    });
+    
+    // Scroll behavior
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        clearTimeout(hideTimeout);
+        clearTimeout(interactionTimeout);
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            hideTimeout = setTimeout(() => {
+                navbar.classList.add('hidden');
+            }, 1500);
+        } else {
+            navbar.classList.remove('hidden');
         }
-    }, 1000);
-};
-if (navbar) {
-    navbar.addEventListener('mouseenter', navbarEnterHandler);
-    navbar.addEventListener('mouseleave', navbarLeaveHandler);
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // Visibility change
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            navbar.classList.remove('hidden');
+            clearTimeout(hideTimeout);
+            clearTimeout(interactionTimeout);
+        }
+    });
+    
+    // Mouse movement tracking
+    document.addEventListener('mousemove', (event) => {
+        const rect = navbar.getBoundingClientRect();
+        const isOverNavbar = event.clientY >= rect.top && event.clientY <= rect.bottom &&
+                             event.clientX >= rect.left && event.clientX <= rect.right;
+        
+        if (isOverNavbar) {
+            clearTimeout(hideTimeout);
+            clearTimeout(interactionTimeout);
+            navbar.classList.remove('hidden');
+        }
+    });
 }
 
-// Track mouse movements
-const mouseMoveHandler = function(event) {
-    if (!navbar) return;
-    if (isCursorOverNavbar(event)) {
-        clearNavbarTimeouts();
-        navbar.classList.remove('hidden');
+// Portfolio-specific animations
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    if (skillBars.length === 0) return;
+    
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for older browsers
+        skillBars.forEach(animateSkillBar);
+        return;
     }
-};
-document.addEventListener('mousemove', mouseMoveHandler);
-
-    // Video play/pause based on viewport visibility (for loaded videos only)
-    function handleVideoVisibility() {
-        const videos = document.querySelectorAll('video.video-bg');
-        videos.forEach(video => {
-            if (video.src && isElementInViewport(video)) {
-            } else if (video.src) {
-                video.pause();
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateSkillBar(entry.target);
+                observer.unobserve(entry.target);
             }
         });
-    }
-
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom >= 0
-        );
-    }
-
-    // Scroll and resize handlers with cleanup
-    const scrollHandler = function(ev) {
-        handleVideoVisibility();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        clearNavbarTimeouts();
-
-        if (navbar) {
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                scrollTimeout = setTimeout(() => navbar.classList.add('hidden'), 1500);
-            } else {
-                navbar.classList.remove('hidden');
-            }
-        }
-
-        lastScrollTop = scrollTop;
-    };
-
-    const resizeHandler = function() {
-        handleVideoVisibility();
-    };
-
-    window.addEventListener('scroll', scrollHandler);
-    window.addEventListener('resize', resizeHandler);
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-        clearNavbarTimeouts();
-        document.removeEventListener('visibilitychange', visibilityHandler);
-        if (navbar) {
-            navbar.removeEventListener('mouseenter', navbarEnterHandler);
-            navbar.removeEventListener('mouseleave', navbarLeaveHandler);
-        }
-        document.removeEventListener('mousemove', mouseMoveHandler);
-        window.removeEventListener('scroll', scrollHandler);
-        window.removeEventListener('resize', resizeHandler);
+    }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
     });
+    
+    skillBars.forEach(bar => observer.observe(bar));
+}
+
+function animateSkillBar(progressBar) {
+    const progress = progressBar.getAttribute('data-progress');
+    if (!progress) return;
+    
+    setTimeout(() => {
+        progressBar.style.width = progress + '%';
+    }, 200);
+}
+
+function animateTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems.length === 0) return;
+    
+    if (!('IntersectionObserver' in window)) {
+        // Fallback for older browsers
+        timelineItems.forEach(item => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+        });
+        return;
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+    });
+}
+
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 100;
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+}
+
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    // Clear any pending timeouts
+    clearTimeout(hideTimeout);
+    clearTimeout(interactionTimeout);
+});

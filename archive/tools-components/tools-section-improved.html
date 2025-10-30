@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools & Skills | Marceli Cieplik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #020305;
+            --text-color: #E5E5E5;
+            --muted-color: #8B8B8B;
+            --accent-color: #4A8B5C;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .tools-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tools-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tools-header h1 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tools-header p {
+            font-size: 1rem;
+            color: var(--muted-color);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .tools-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-category {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-category:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            background: rgba(74, 139, 92, 0.1);
+            border: 1px solid rgba(74, 139, 92, 0.2);
+        }
+
+        .category-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--muted-color);
+        }
+
+        .tools-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .tool-group {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 0.8rem;
+        }
+
+        .tool-group-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .tool-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(74, 139, 92, 0.1);
+            border-color: rgba(74, 139, 92, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .tools-container {
+                padding: 1rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .tool-category {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="tools-section">
+        <div class="tools-header">
+            <h1>Tools & Skills</h1>
+            <p>A comprehensive toolkit for modern development and design</p>
+        </div>
+
+        <div class="tools-container">
+            <div class="tools-grid">
+                <!-- Build & Design Like a Pro -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🎨</div>
+                        <h3 class="category-title">Build & Design Like a Pro</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Core Languages</div>
+                            <div class="tool-items">
+                                <span class="tool-item">HTML</span>
+                                <span class="tool-item">CSS</span>
+                                <span class="tool-item">JavaScript</span>
+                                <span class="tool-item">PHP</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Additional</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Swift</span>
+                                <span class="tool-item">Python</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Design & Prototyping</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Figma</span>
+                                <span class="tool-item">Flutter</span>
+                                <span class="tool-item">Webflow</span>
+                                <span class="tool-item">Proto.io</span>
+                                <span class="tool-item">InVision</span>
+                                <span class="tool-item">Sketch</span>
+                                <span class="tool-item">Zeplin</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Video Editing</div>
+                            <div class="tool-items">
+                                <span class="tool-item">DaVinci Video</span>
+                                <span class="tool-item">CapCut</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Frameworks/CMS</div>
+                            <div class="tool-items">
+                                <span class="tool-item">WordPress</span>
+                                <span class="tool-item">PrestaShop</span>
+                                <span class="tool-item">Bootstrap</span>
+                                <span class="tool-item">Foundation</span>
+                                <span class="tool-item">Next.js</span>
+                                <span class="tool-item">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Harness AI & Research -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🤖</div>
+                        <h3 class="category-title">Harness AI & Research</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">AI Development</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Vector databases</span>
+                                <span class="tool-item">Notebook LM</span>
+                                <span class="tool-item">Perplexity Pro</span>
+                                <span class="tool-item">Kim K2</span>
+                                <span class="tool-item">LMArena</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Knowledge Org</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Notion</span>
+                                <span class="tool-item">Airtable</span>
+                                <span class="tool-item">Slack</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">IDEs</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Trae</span>
+                                <span class="tool-item">Visual Code</span>
+                                <span class="tool-item">Cursor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automate & Deploy with Precision -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">⚡</div>
+                        <h3 class="category-title">Automate & Deploy with Precision</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Workflow Automation</div>
+                            <div class="tool-items">
+                                <span class="tool-item">n8n.com</span>
+                                <span class="tool-item">make.com</span>
+                                <span class="tool-item">MCP</span>
+                                <span class="tool-item">RAC</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">LLMs & AI Models</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Claude 3.7/4.5</span>
+                                <span class="tool-item">Groq 3</span>
+                                <span class="tool-item">Gemini</span>
+                                <span class="tool-item">Roo Cline</span>
+                                <span class="tool-item">Qwen Coder</span>
+                                <span class="tool-item">Llama 4.1</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Deployment/Cloud</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Supabase</span>
+                                <span class="tool-item">Vercel</span>
+                                <span class="tool-item">GitHub</span>
+                                <span class="tool-item">Cloudflare</span>
+                                <span class="tool-item">DigitalOcean</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voice & Multimodal Magic -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🎤</div>
+                        <h3 class="category-title">Voice & Multimodal Magic</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Voice Tools</div>
+                            <div class="tool-items">
+                                <span class="tool-item">ElevenLabs</span>
+                                <span class="tool-item">HeyGen.ai</span>
+                                <span class="tool-item">Voice.ai</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grow Your Business -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">📈</div>
+                        <h3 class="category-title">Grow Your Business</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Content & Marketing</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Strategy</span>
+                                <span class="tool-item">Social Media</span>
+                                <span class="tool-item">Content Writing</span>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <div class="tool-group-title">Analytics/Business</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Sales Funnels</span>
+                                <span class="tool-item">E-commerce</span>
+                                <span class="tool-item">B2B</span>
+                                <span class="tool-item">SaaS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adopt Next-Gen Tools -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🚀</div>
+                        <h3 class="category-title">Adopt Next-Gen Tools</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Hot New Tools</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Studio.design</span>
+                                <span class="tool-item">Penpot.app</span>
+                                <span class="tool-item">Google Studio AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Never Lose the Basics -->
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🧠</div>
+                        <h3 class="category-title">Never Lose the Basics</h3>
+                    </div>
+                    <div class="tools-list">
+                        <div class="tool-group">
+                            <div class="tool-group-title">Foundational Tools</div>
+                            <div class="tool-items">
+                                <span class="tool-item">Notepad</span>
+                                <span class="tool-item">Pen</span>
+                                <span class="tool-item">Brain</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Subtle interactive behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            const toolCategories = document.querySelectorAll('.tool-category');
+            
+            toolCategories.forEach(category => {
+                category.addEventListener('click', function() {
+                    // Subtle click effect without lift
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

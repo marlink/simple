@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Marceli Cieplik | UI/UX Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #020305;
+            --text-color: #E5E5E5;
+            --muted-color: #8B8B8B;
+            --accent-color: #4A8B5C;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .tools-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 1rem;
+        }
+
+        .tools-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .tools-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .tools-header p {
+            font-size: 1.2rem;
+            color: var(--muted-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .tool-category {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-category:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: rgba(74, 139, 92, 0.1);
+            border: 1px solid rgba(74, 139, 92, 0.2);
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--muted-color);
+        }
+
+        .tools-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tool-group {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .tool-group-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .tool-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(74, 139, 92, 0.1);
+            border-color: rgba(74, 139, 92, 0.2);
+        }
+
+        /* Bio Section */
+        .bio-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 1rem 2rem 1rem;
+        }
+
+        .bio-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bio-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .bio-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--muted-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tools-container {
+                padding: 2rem;
+            }
+
+            .tool-category {
+                padding: 1.5rem;
+            }
+
+            .bio-content {
+                padding: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tools-section {
+                padding: 4rem 1rem;
+            }
+
+            .tools-container {
+                padding: 1.5rem;
+            }
+
+            .tool-category {
+                padding: 1.2rem;
+            }
+
+            .category-header {
+                gap: 0.8rem;
+            }
+
+            .category-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-left">
+            <a href="index.html" aria-label="Home">
+                <img src="img/logo/mc-logo.svg" alt="MC Logo" class="navbar-logo" loading="lazy" width="1024" height="768" />
+            </a>
+        </div>
+        <div class="navbar-center">
+            <div class="nav-links">
+                <a href="index.html#hero">Home</a>
+                <a href="services.html">Services</a>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#what">What</a>
+                <a href="labs.html">Labs</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html" class="active">About</a>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a class="btn-free-website cta-btn" href="contact.html#form">Free website</a>
+            <div class="login-icon">
+                <img src="img/icons/login.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="content" style="padding-top: 6rem;">
+        <!-- Bio Section -->
+        <section class="bio-section">
+            <div class="bio-content">
+                <h2>About Marceli Cieplik</h2>
+                <p>
+                    I'm a passionate UI/UX designer and developer with a focus on creating exceptional digital experiences. 
+                    With years of experience in the industry, I specialize in bridging the gap between creative design and 
+                    technical implementation.
+                </p>
+                <p>
+                    My approach combines user-centered design principles with modern development practices, ensuring that 
+                    every project not only looks great but also performs flawlessly across all devices and platforms.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Skills Section -->
+        <section class="tools-section">
+            <div class="tools-header">
+                <h1>Tools & Skills</h1>
+                <p>A comprehensive toolkit for modern development and design</p>
+            </div>
+
+            <div class="tools-container">
+                <div class="tools-grid">
+                    <!-- Build & Design Like a Pro -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">🎨</div>
+                            <h3 class="category-title">Build & Design Like a Pro</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Core Languages</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">HTML</span>
+                                    <span class="tool-item">CSS</span>
+                                    <span class="tool-item">JavaScript</span>
+                                    <span class="tool-item">PHP</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Additional</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Swift</span>
+                                    <span class="tool-item">Python</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Design & Prototyping</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Figma</span>
+                                    <span class="tool-item">Flutter</span>
+                                    <span class="tool-item">Webflow</span>
+                                    <span class="tool-item">Proto.io</span>
+                                    <span class="tool-item">InVision</span>
+                                    <span class="tool-item">Sketch</span>
+                                    <span class="tool-item">Zeplin</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Video Editing</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">DaVinci Video</span>
+                                    <span class="tool-item">CapCut</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Frameworks/CMS</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">WordPress</span>
+                                    <span class="tool-item">PrestaShop</span>
+                                    <span class="tool-item">Bootstrap</span>
+                                    <span class="tool-item">Foundation</span>
+                                    <span class="tool-item">Next.js</span>
+                                    <span class="tool-item">React</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Harness AI & Research -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">🤖</div>
+                            <h3 class="category-title">Harness AI & Research</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">AI Development</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Vector databases</span>
+                                    <span class="tool-item">Notebook LM</span>
+                                    <span class="tool-item">Perplexity Pro</span>
+                                    <span class="tool-item">Kim K2</span>
+                                    <span class="tool-item">LMArena</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Knowledge Org</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Notion</span>
+                                    <span class="tool-item">Airtable</span>
+                                    <span class="tool-item">Slack</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">IDEs</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Trae</span>
+                                    <span class="tool-item">Visual Code</span>
+                                    <span class="tool-item">Cursor</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Automate & Deploy with Precision -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">⚡</div>
+                            <h3 class="category-title">Automate & Deploy with Precision</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Workflow Automation</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">n8n.com</span>
+                                    <span class="tool-item">make.com</span>
+                                    <span class="tool-item">MCP</span>
+                                    <span class="tool-item">RAC</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">LLMs & AI Models</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Claude 3.7/4.5</span>
+                                    <span class="tool-item">Groq 3</span>
+                                    <span class="tool-item">Gemini</span>
+                                    <span class="tool-item">Roo Cline</span>
+                                    <span class="tool-item">Qwen Coder</span>
+                                    <span class="tool-item">Llama 4.1</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Deployment/Cloud</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Supabase</span>
+                                    <span class="tool-item">Vercel</span>
+                                    <span class="tool-item">GitHub</span>
+                                    <span class="tool-item">Cloudflare</span>
+                                    <span class="tool-item">DigitalOcean</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice & Multimodal Magic -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">🎤</div>
+                            <h3 class="category-title">Voice & Multimodal Magic</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Voice Tools</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">ElevenLabs</span>
+                                    <span class="tool-item">HeyGen.ai</span>
+                                    <span class="tool-item">Voice.ai</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grow Your Business -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">📈</div>
+                            <h3 class="category-title">Grow Your Business</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Content & Marketing</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Strategy</span>
+                                    <span class="tool-item">Social Media</span>
+                                    <span class="tool-item">Content Writing</span>
+                                </div>
+                            </div>
+                            <div class="tool-group">
+                                <div class="tool-group-title">Analytics/Business</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Sales Funnels</span>
+                                    <span class="tool-item">E-commerce</span>
+                                    <span class="tool-item">B2B</span>
+                                    <span class="tool-item">SaaS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adopt Next-Gen Tools -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">🚀</div>
+                            <h3 class="category-title">Adopt Next-Gen Tools</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Hot New Tools</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Studio.design</span>
+                                    <span class="tool-item">Penpot.app</span>
+                                    <span class="tool-item">Google Studio AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Never Lose the Basics -->
+                    <div class="tool-category">
+                        <div class="category-header">
+                            <div class="category-icon">🧠</div>
+                            <h3 class="category-title">Never Lose the Basics</h3>
+                        </div>
+                        <div class="tools-list">
+                            <div class="tool-group">
+                                <div class="tool-group-title">Foundational Tools</div>
+                                <div class="tool-items">
+                                    <span class="tool-item">Notepad</span>
+                                    <span class="tool-item">Pen</span>
+                                    <span class="tool-item">Brain</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="about.html" aria-current="page">About</a>
+                    <a href="#">Style Guide</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>About Marceli</h3>
+                <p class="footer-description">
+                    Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
+                    With expertise in creating intuitive interfaces and engaging user journeys,
+                    we transform ideas into exceptional digital solutions.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com/marcelicieplik" aria-label="Instagram">ig</a>
+                    <a href="https://x.com/marcelicieplik" aria-label="X.com">𝕏</a>
+                    <a href="https://youtube.com/@marcelicieplik" aria-label="YouTube">yt</a>
+                    <a href="https://substack.com/@marcelicieplik" aria-label="Substack">sub</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
+        </div>
+    </footer>
+
+    <script defer src="script.js"></script>
+</body>
+</html>

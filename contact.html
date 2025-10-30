@@ -4,88 +4,557 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Marceli Cieplik | UI/UX Designer</title>
-  <meta name="description" content="Contact Marceli Cieplik. Start a WhatsApp chat or send a message via the contact form.">
+  <meta name="description" content="Contact Marceli Cieplik. Start a WhatsApp chat, Telegram message, or send a message via the contact form.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Page-specific small additions */
+    /* Page-specific additions */
     .cta-btn { text-decoration: none; }
+    
+    /* Hero Messaging Section */
+    .messaging-section {
+      padding: 3rem 0;
+    }
+    
+    .messaging-grid, .messaging-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
     .whatsapp-card {
-      background: #075e54; /* WhatsApp primary */
       background: linear-gradient(135deg, #075e54 0%, #128c7e 60%, #25d366 100%);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      border-radius: 16px;
-      padding: 2rem;
+      border-radius: 20px;
+      padding: 2.5rem;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 1rem;
+      gap: 1.5rem;
       align-items: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .whatsapp-card h2 { margin: 0; }
-    .whatsapp-btn {
-      background: #25d366;
+    
+    .whatsapp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(37,211,102,0.4);
+    }
+    
+    .telegram-card {
+      background: linear-gradient(135deg, #0088cc 0%, #229ed9 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .telegram-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(34,158,217,0.4);
+    }
+    
+    .x-card {
+      background: linear-gradient(135deg, #000000 0%, #1d1d1d 50%, #333333 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .x-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    
+    .substack-card {
+      background: linear-gradient(135deg, #FF6719 0%, #FF8A33 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .substack-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(255,103,25,0.4);
+    }
+    
+    .messaging-content h2 { 
+      margin: 0 0 0.5rem 0; 
+      font-size: 1.5rem; 
+      font-weight: 700;
+    }
+    
+    .messaging-content .description { 
+      color: rgba(255, 255, 255, 0.9); 
+      font-size: 1rem; 
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    .contact-btn {
+      background: rgba(255, 255, 255, 0.95);
       color: #111;
       border: 2px solid rgba(255,255,255,0.35);
-      border-radius: 999px;
-      padding: 0.9rem 1.25rem;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
-      transition: transform .2s ease, box-shadow .2s ease;
-      box-shadow: 0 8px 24px rgba(37,211,102,.25);
+      gap: 0.75rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+      font-size: 1rem;
+      white-space: nowrap;
     }
-    .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(37,211,102,.35); }
+    
+    .contact-btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 12px 35px rgba(0,0,0,0.3); 
+      background: #fff;
+    }
+    
+    .contact-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
 
-    .contact-form {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 2rem;
+    /* YouTube Section */
+    .youtube-section {
+      padding: 3rem 0;
+      background: rgba(255,255,255,0.02);
+      border-radius: 20px;
+      margin: 2rem 0;
+    }
+
+    .youtube-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .youtube-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .youtube-grid {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .youtube-card {
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .youtube-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 135px;
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumbnail::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid #fff;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 5px;
+    }
+
+    .video-info {
+      padding: 1rem;
+    }
+
+    .video-title {
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.3;
+    }
+
+    .video-meta {
+      color: #B0B0B0;
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 0;
+      margin: 3rem 0;
+      width: 100%;
+    }
+
+    .newsletter-container {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .newsletter-card {
+      background: linear-gradient(135deg, #00ff00 0%, #4A8B5C 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: #111;
+      box-shadow: 0 15px 45px rgba(0, 255, 0, 0.3);
+      width: 100%;
+    }
+
+    .newsletter-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      color: #111;
+    }
+
+    .newsletter-description {
+      font-size: 1.1rem;
+      color: rgba(17, 17, 17, 0.8);
+      margin: 0 0 2rem 0;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 1rem;
-      max-width: 800px;
-      margin: 2rem auto 0;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      color: #333;
+      font-family: inherit;
+    }
+
+    .newsletter-input::placeholder {
+      color: #666;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .newsletter-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .newsletter-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Social Media Section */
+    .social-section {
+      padding: 2.5rem 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    .section-subtitle {
+      color: #B0B0B0;
+      font-size: 1rem;
+      margin: 0;
+    }
+    
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .social-link {
+      color: #E5E5E5;
+      text-decoration: none;
+      padding: 1.5rem 1rem;
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-align: center;
+      display: grid;
+      gap: 0.75rem;
+    }
+    
+    .social-link:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      color: #fff;
+    }
+    
+    .social-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    
+    .social-link .platform-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    /* Contact Form Section */
+    .contact-section {
+      padding: 2.5rem 0;
+    }
+    
+    .website-url {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .website-url a {
+      color: #B0B0B0;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    
+    .website-url a:hover {
+      color: #fff;
+    }
+    
+    .contact-form {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      background: rgba(255,255,255,.08);
-      color: #e5e5e5;
-      border: 1px solid rgba(255,255,255,.15);
-      padding: 0.9rem 1rem;
-      border-radius: 12px;
-      font-family: inherit;
+    
+    .form-header {
+      text-align: center;
+      margin-bottom: 1rem;
     }
-    .contact-form button {
-      justify-self: start;
+    
+    .form-header h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: 600;
     }
-
-    .team-grid {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+    
+    .form-header p {
+      margin: 0;
+      color: #B0B0B0;
+      font-size: 0.95rem;
     }
-    .team-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 1.25rem;
+    
+    .form-group {
       display: grid;
       gap: 0.5rem;
-      text-align: center;
     }
-    .team-card img {
-      width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin: 0 auto .75rem; border: 2px solid rgba(255,255,255,.2);
+    
+    .form-group label {
+      font-weight: 500;
+      color: #E5E5E5;
+      font-size: 0.95rem;
     }
-    .muted { color: #B0B0B0; font-size: .95rem; }
+    
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,.1);
+      color: #e5e5e5;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: #25d366;
+      background: rgba(255,255,255,.12);
+      box-shadow: 0 0 0 3px rgba(37,211,102,0.1);
+    }
+    
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .contact-form button {
+      justify-self: center;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 25px rgba(37,211,102,0.3);
+    }
+    
+    .contact-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(37,211,102,0.4);
+      background: linear-gradient(135deg, #128c7e 0%, #25d366 100%);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .messaging-grid, .messaging-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .whatsapp-card,
+      .telegram-card,
+      .x-card,
+      .substack-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+        padding: 2rem;
+      }
+      
+      .youtube-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      
+      .newsletter-form {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .newsletter-btn {
+        padding: 1rem 1.5rem;
+      }
+      
+      .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      
+      .contact-form {
+        padding: 2rem;
+        margin: 0 1rem;
+      }
+      
+      .contact-btn {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .youtube-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .newsletter-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .newsletter-title {
+        font-size: 1.5rem;
+      }
+      
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -99,12 +568,13 @@
       <div class="nav-links">
         <a href="index.html#hero">Home</a>
         <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
         <a href="index.html#what">What</a>
         <a href="contact.html" class="active">Contact</a>
       </div>
     </div>
     <div class="navbar-right">
-      <a class="btn-free-website cta-btn" href="contact.html#form" style="text-decoration:none;">Free website</a>
+      <a class="btn-free-website cta-btn" href="contact.html#form">Free website</a>
       <div class="login-icon">
         <img src="img/icons/login.svg" alt="User Login" class="user-icon" loading="lazy" width="24" height="24" />
       </div>
@@ -112,71 +582,199 @@
   </nav>
 
   <main class="content" style="padding-top: 6rem;">
-    <header style="text-align:center; margin-top: 3rem;">
-      <h1 class="section-title">Contact</h1>
-      <p style="max-width:760px;margin:0.75rem auto 0; color:#B0B0B0;">Start a WhatsApp chat or send us a message. We typically respond within one business day.</p>
+    <header style="text-align:center; margin-bottom: 3rem;">
+      <h1 class="section-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Let's Connect</h1>
+      <p style="max-width:600px;margin:0 auto; color:#B0B0B0; font-size: 1.1rem;">Choose your preferred way to reach out. I'm here to help bring your ideas to life.</p>
     </header>
 
-    <section class="content" style="padding-top:2rem;">
-      <div class="two-col" style="display:grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch;">
+    <!-- Main Messaging Section -->
+    <section class="messaging-section">
+      <div class="messaging-grid">
         <div class="whatsapp-card">
-          <div>
+          <div class="messaging-content">
             <h2>WhatsApp</h2>
-            <p class="muted">Quick chat on WhatsApp in brand colours</p>
+            <p class="description">Quick and easy messaging for instant communication</p>
           </div>
-          <a class="whatsapp-btn" href="https://wa.me/48578023466" target="_blank" rel="noopener" aria-label="Start WhatsApp Chat">
-            <span>Start chat</span>
+          <a class="contact-btn" href="https://wa.me/48578023466" target="_blank" rel="noopener" aria-label="Start WhatsApp Chat">
+            <svg viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+            <span>Chat Now</span>
           </a>
         </div>
 
-        <form id="form" class="contact-form" onsubmit="event.preventDefault(); alert('Message submitted. Thank you!');">
-          <h2 style="margin:0;">Send a message</h2>
-          <label>
-            <span class="muted">Your message</span>
-            <textarea name="message" rows="6" placeholder="Tell us about your project" required></textarea>
-          </label>
-          <label>
-            <span class="muted">Email or phone</span>
-            <input name="contact" type="text" placeholder="name@example.com or +48 123 456 789" required />
-          </label>
-          <button type="submit" class="btn btn-medium">Send</button>
-        </form>
+        <div class="telegram-card">
+          <div class="messaging-content">
+            <h2>Telegram</h2>
+            <p class="description">Fast and secure messaging with instant delivery</p>
+          </div>
+          <a class="contact-btn" href="https://t.me/marcelicieplik" target="_blank" rel="noopener" aria-label="Start Telegram Chat">
+            <svg viewBox="0 0 24 24">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            <span>Message</span>
+          </a>
+        </div>
       </div>
+    </section>
 
-      <section class="content" style="padding-top:2rem;">
-        <style>
-          @media (min-width: 992px) {
-            .two-col { grid-template-columns: 1fr 1fr !important; }
-          }
-        </style>
-        <h2 class="section-title" style="text-align:center;">Our team</h2>
-        <div class="team-grid">
-          <div class="team-card">
-            <img src="https://i.pravatar.cc/150?img=1" alt="Team member A" />
-            <h3>Marceli Cieplik</h3>
-            <p class="muted">UI/UX Designer</p>
-            <p class="muted">marceli@example.com</p>
+    <!-- Additional Messaging Row -->
+    <section class="messaging-section">
+      <div class="messaging-row">
+        <div class="x-card">
+          <div class="messaging-content">
+            <h2>X (Twitter)</h2>
+            <p class="description">Real-time updates and quick thoughts</p>
           </div>
-          <div class="team-card">
-            <img src="https://i.pravatar.cc/150?img=2" alt="Team member B" />
-            <h3>Alex Nowak</h3>
-            <p class="muted">Frontend Engineer</p>
-            <p class="muted">alex@example.com</p>
+          <a class="contact-btn" href="https://x.com/marcelicieplik" target="_blank" rel="noopener" aria-label="Follow on X">
+            <svg viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>Follow</span>
+          </a>
+        </div>
+
+        <div class="substack-card">
+          <div class="messaging-content">
+            <h2>Substack</h2>
+            <p class="description">Weekly insights and deep dives</p>
           </div>
-          <div class="team-card">
-            <img src="https://i.pravatar.cc/150?img=3" alt="Team member C" />
-            <h3>Patricia Zielinska</h3>
-            <p class="muted">Product Manager</p>
-            <p class="muted">patricia@example.com</p>
+          <a class="contact-btn" href="https://substack.com/@marcelicieplik" target="_blank" rel="noopener" aria-label="Subscribe on Substack">
+            <svg viewBox="0 0 24 24">
+              <path d="M21.115 2.59L11.94 11.764V5.288c0-1.187-1.012-2.129-2.133-2.129s-2.133.942-2.133 2.129v6.476L2.885 2.59c-1.12 0-2.129.942-2.129 2.129v14.278c0 1.187.942 2.129 2.129 2.129h18.23c1.187 0 2.129-.942 2.129-2.129V4.719c0-1.187-.942-2.129-2.129-2.129zM10.807 15.243c-.742 0-1.344-.602-1.344-1.344s.602-1.344 1.344-1.344c.742 0 1.344.602 1.344 1.344s-.602 1.344-1.344 1.344zm6.75 0c-.742 0-1.344-.602-1.344-1.344s.602-1.344 1.344-1.344c.742 0 1.344.602 1.344 1.344s-.602 1.344-1.344 1.344z"/>
+            </svg>
+            <span>Subscribe</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube Section -->
+    <section class="youtube-section">
+      <div class="youtube-header">
+        <h2 class="section-title">YouTube Channel</h2>
+        <p class="section-subtitle">Watch my latest tutorials and design insights</p>
+      </div>
+      
+      <div class="youtube-content">
+        <div class="youtube-grid">
+          <div class="youtube-card">
+            <div class="video-thumbnail">Design Systems</div>
+            <div class="video-info">
+              <div class="video-title">Building Scalable Design Systems</div>
+              <div class="video-meta">15K views • 2 days ago</div>
+            </div>
           </div>
-          <div class="team-card">
-            <img src="https://i.pravatar.cc/150?img=4" alt="Team member D" />
-            <h3>Omar Kowalski</h3>
-            <p class="muted">QA Specialist</p>
-            <p class="muted">omar@example.com</p>
+          
+          <div class="youtube-card">
+            <div class="video-thumbnail">UI/UX Tips</div>
+            <div class="video-info">
+              <div class="video-title">5 UI/UX Mistakes to Avoid</div>
+              <div class="video-meta">8.2K views • 1 week ago</div>
+            </div>
+          </div>
+          
+          <div class="youtube-card">
+            <div class="video-thumbnail">Figma Tutorial</div>
+            <div class="video-info">
+              <div class="video-title">Advanced Figma Prototyping</div>
+              <div class="video-meta">12K views • 3 days ago</div>
+            </div>
+          </div>
+          
+          <div class="youtube-card">
+            <div class="video-thumbnail">Portfolio</div>
+            <div class="video-info">
+              <div class="video-title">My Design Portfolio Review</div>
+              <div class="video-meta">20K views • 5 days ago</div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section">
+      <div class="section-header">
+        <h2 class="section-title">Follow Me</h2>
+        <p class="section-subtitle">Stay updated with my latest work and insights</p>
+      </div>
+      
+      <div class="social-grid">
+        <a href="https://instagram.com/marcelicieplik" class="social-link" target="_blank" rel="noopener" aria-label="Follow on Instagram">
+          <div class="social-icon">📷</div>
+          <span class="platform-name">Instagram</span>
+        </a>
+        
+        <a href="https://youtube.com/@marcelicieplik" class="social-link" target="_blank" rel="noopener" aria-label="Subscribe on YouTube">
+          <div class="social-icon">▶️</div>
+          <span class="platform-name">YouTube</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section">
+      <div class="website-url">
+        <a href="https://marcelicieplik.com" target="_blank" rel="noopener">
+          🌐 marcelicieplik.com
+        </a>
+      </div>
+      
+      <form id="form" class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! I\'ll get back to you soon.'); this.reset();">
+        <div class="form-header">
+          <h3>Send a Message</h3>
+          <p>Fill out the form below and I'll respond within 24 hours</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact">Email or Phone Number *</label>
+          <input
+            id="contact"
+            name="contact"
+            type="text"
+            placeholder="name@example.com or +48 123 456 789"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Tell me about your project, goals, or any questions you have..."
+            required
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="btn">
+          Send Message
+        </button>
+      </form>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="newsletter-container">
+        <div class="newsletter-card">
+          <div class="newsletter-header">
+            <h2 class="newsletter-title">Stay in the Loop</h2>
+            <p class="newsletter-description">Get weekly design insights, tutorials, and exclusive content delivered to your inbox.</p>
+          </div>
+          
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!'); this.reset();">
+            <input
+              type="email"
+              class="newsletter-input"
+              placeholder="Enter your email address"
+              required
+            />
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -189,30 +787,35 @@
           <a href="services.html">Services</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html" aria-current="page">Contact</a>
+          <a href="#">Style Guide</a>
         </div>
       </div>
 
       <div class="footer-section">
-        <h3>Connect</h3>
-        <div class="social-links">
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Twitter">t</a>
-          <a href="#" aria-label="Instagram">ig</a>
-        </div>
-      </div>
-
-      <div class="footer-section">
-        <h3>About</h3>
+        <h3>About Marceli</h3>
         <p class="footer-description">
           Marceli Cieplik is a UI/UX Designer specializing in modern web experiences.
           With expertise in creating intuitive interfaces and engaging user journeys,
           we transform ideas into exceptional digital solutions.
         </p>
       </div>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://instagram.com/marcelicieplik" aria-label="Instagram">ig</a>
+          <a href="https://x.com/marcelicieplik" aria-label="X.com">𝕏</a>
+          <a href="https://youtube.com/@marcelicieplik" aria-label="YouTube">yt</a>
+          <a href="https://substack.com/@marcelicieplik" aria-label="Substack">sub</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="footer-version">v. 0.2 | © 2025 Design System LTD</p>
     </div>
   </footer>
 
   <script defer src="script.js"></script>
 </body>
 </html>
-html>
